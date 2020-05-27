@@ -15,23 +15,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("windows/projects/projects.fxml"));
+        stage = primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("windows/createProjects/CreateProject.fxml"));
         primaryStage.setTitle("Forge Gui Creator");
         primaryStage.setScene(new Scene(root));
         primaryStage.centerOnScreen();
         primaryStage.show();
 
-        stage = primaryStage;
-
         FilesManager.initFiles();
-
-        FilesManager.createProject("test", "Kysio", "1.14.4");
-
-        Project project = FilesManager.getProject("test");
-
-        if(project != null){
-            System.out.println("project : "+project.getName()+" / "+project.getAuthor()+" / "+project.getVersion()+" / "+project);
-        }
     }
 
     public static void changeWindow(Parent root){
