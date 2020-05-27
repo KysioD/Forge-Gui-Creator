@@ -24,6 +24,37 @@ public class FilesManager {
         }
     }
 
+    private static void removeFolder(File folder){
+        for(File f : folder.listFiles()){
+            if(f.isDirectory()){
+                removeFolder(f);
+            }else{
+                f.delete();
+            }
+        }
+    }
+
+    public static void removeProject(String name){
+        File projectFolder = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name);
+
+        if(!projectFolder.exists()) {
+            System.out.println("remove project not exist");
+            return;
+        }
+
+        for(File file : projectFolder.listFiles()){
+            if(file.isDirectory()){
+                removeFolder(file);
+            }else{
+                file.delete();
+            }
+        }
+
+        projectFolder.delete();
+
+        System.out.println("project deleted");
+    }
+
     public static void updateProject(String name, String newName, String newAuthor, String newVersion){
         Gson gson = new Gson();
 
