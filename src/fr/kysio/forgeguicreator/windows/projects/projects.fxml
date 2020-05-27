@@ -95,15 +95,15 @@
                                  <children>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: orange;" text="Modifier">
+                                          <Button mnemonicParsing="false" onAction="#updateProject" style="-fx-background-color: orange;" text="Modifier">
                                              <HBox.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </HBox.margin></Button>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: green;" text="Lancer">
+                                          <Button mnemonicParsing="false" onAction="#startProject" style="-fx-background-color: green;" text="Lancer">
                                              <HBox.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </HBox.margin></Button>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: red;" text="Supprimer" textFill="WHITE">
+                                          <Button mnemonicParsing="false" onAction="#removeProject" style="-fx-background-color: red;" text="Supprimer" textFill="WHITE">
                                              <HBox.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </HBox.margin></Button>

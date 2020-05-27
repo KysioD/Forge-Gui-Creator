@@ -24,6 +24,35 @@ public class FilesManager {
         }
     }
 
+    public static void updateProject(String name, String newName, String newAuthor, String newVersion){
+        Gson gson = new Gson();
+
+        File projectFolder = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name);
+        File projectFile = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name + "/project.json");
+
+        if(!projectFolder.exists() || !projectFile.exists()) return;
+
+        projectFile.delete();
+        projectFolder.renameTo(new File(System.getProperty("user.home") + "/gui-creator/projects/" + newName));
+
+        try {
+            File file = new File(System.getProperty("user.home") + "/gui-creator/projects/" + newName + "/project.json");
+
+            file.createNewFile();
+
+            DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+
+            String json = gson.toJson(new Project(newName, newAuthor, newVersion));
+
+            dos.writeUTF(json);
+
+            dos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static ArrayList<Project> getprojects(){
         ArrayList<Project> projects = new ArrayList<>();
 

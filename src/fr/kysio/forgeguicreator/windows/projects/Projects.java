@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class Projects {
 
+    public static Project project = null;
+
     @FXML
     public Label name;
 
@@ -28,7 +30,11 @@ public class Projects {
         this.selectedProject = 0;
         Main.stage.setResizable(true);
 
-        Project project = projects.get(selectedProject);
+        update();
+    }
+
+    public void update(){
+        project = projects.get(selectedProject);
 
         name.setText(project.getName());
         author.setText(project.getAuthor());
@@ -40,12 +46,23 @@ public class Projects {
             selectedProject++;
         }
 
+        update();
+    }
 
-        Project project = projects.get(selectedProject);
+    public void updateProject(){
+        try {
+            Main.changeWindow(FXMLLoader.load(getClass().getResource("../updateproject/updateproject.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        name.setText(project.getName());
-        author.setText(project.getAuthor());
-        version.setText(project.getVersion());
+    public void startProject(){
+
+    }
+
+    public void removeProject(){
+
     }
 
     public void precedentProject(){
@@ -53,12 +70,7 @@ public class Projects {
             selectedProject--;
         }
 
-
-        Project project = projects.get(selectedProject);
-
-        name.setText(project.getName());
-        author.setText(project.getAuthor());
-        version.setText(project.getVersion());
+        update();
     }
 
     public void createProject(){
