@@ -2,10 +2,12 @@ package fr.kysio.forgeguicreator.utils;
 
 import com.google.gson.Gson;
 import fr.kysio.forgeguicreator.Project;
-import fr.kysio.forgeguicreator.exceptions.ProjectAlreadyExistException;
+import sun.java2d.cmm.Profile;
 
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 
 public class FilesManager {
 
@@ -20,6 +22,27 @@ public class FilesManager {
         if (!projects.exists()) {
             projects.mkdirs();
         }
+    }
+
+    public static ArrayList<Project> getprojects(){
+        ArrayList<Project> projects = new ArrayList<>();
+
+        File f = new File(System.getProperty("user.home") + "/gui-creator/projects");
+
+        Gson gson = new Gson();
+
+        for(File file : f.listFiles()){
+            if(file.isDirectory()){
+                String name = file.getName();
+                Project project = getProject(name);
+
+                if(project != null){
+                    projects.add(project);
+                }
+            }
+        }
+
+        return projects;
     }
 
     public static Project getProject(String name){

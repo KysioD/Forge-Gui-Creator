@@ -7,22 +7,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class Main extends Application {
 
     public static Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        FilesManager.initFiles();
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("windows/createProjects/CreateProject.fxml"));
+
+        Parent root = null;
+        if(FilesManager.getprojects().size() < 0) {
+            root = FXMLLoader.load(getClass().getResource("windows/createprojects/CreateProject.fxml"));
+        }else{
+            root = FXMLLoader.load(getClass().getResource("windows/projects/projects.fxml"));
+        }
         primaryStage.setTitle("Forge Gui Creator");
         primaryStage.setScene(new Scene(root));
         primaryStage.centerOnScreen();
         primaryStage.show();
-
-        FilesManager.initFiles();
     }
 
     public static void changeWindow(Parent root){

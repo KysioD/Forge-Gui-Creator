@@ -73,13 +73,13 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <bottom>
-                              <Label text="Version de minecraft" textFill="WHITE" BorderPane.alignment="CENTER" />
+                              <Label fx:id="version" text="Version de minecraft" textFill="WHITE" BorderPane.alignment="CENTER" />
                            </bottom>
                            <top>
-                              <Label text="Nom du projet" textFill="WHITE" BorderPane.alignment="CENTER" />
+                              <Label fx:id="name" text="Nom du projet" textFill="WHITE" BorderPane.alignment="CENTER" />
                            </top>
                            <center>
-                              <Label text="Auteur du projet" textFill="WHITE" BorderPane.alignment="CENTER" />
+                              <Label fx:id="author" text="Auteur du projet" textFill="WHITE" BorderPane.alignment="CENTER" />
                            </center></BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                            <center>
@@ -115,6 +115,11 @@
                      </children>
                   </GridPane>
                </center></BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <center>
+                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="225.0" text="Créer un nouveau projet" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
          </children>
       </GridPane>
    </center>

@@ -1,4 +1,4 @@
-package fr.kysio.forgeguicreator.windows.createProjects;
+package fr.kysio.forgeguicreator.windows.createprojects;
 
 import fr.kysio.forgeguicreator.Main;
 import fr.kysio.forgeguicreator.utils.FilesManager;
