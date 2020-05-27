@@ -9,14 +9,8 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
 public class RectangleControl extends GuiControl {
-    public RectangleControl(Pane pane) {
-        super("rectangle", pane);
-
-        Button button = new Button("test");
-        button.setLayoutX(20);
-        button.setLayoutY(20);
-
-        pane.getChildren().add(button);
+    public RectangleControl(Pane pane, Pane optionsPane) {
+        super("rectangle", pane, optionsPane);
 
         System.out.println("RECTANGLE DRAWED");
     }
@@ -25,7 +19,7 @@ public class RectangleControl extends GuiControl {
     public ArrayList<GuiControlOption> getOptions() {
         ArrayList<GuiControlOption> options = new ArrayList<>();
 
-        options.add(new ColorPickerOption("background color : ", pane));
+        options.add(new ColorPickerOption("background color : ", optionsPane));
 
         return options;
     }
