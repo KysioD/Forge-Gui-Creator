@@ -1,5 +1,6 @@
 package fr.kysio.forgeguicreator;
 
+import fr.kysio.forgeguicreator.utils.FilesManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +23,15 @@ public class Main extends Application {
 
         stage = primaryStage;
 
+        FilesManager.initFiles();
+
+        FilesManager.createProject("test", "Kysio", "1.14.4");
+
+        Project project = FilesManager.getProject("test");
+
+        if(project != null){
+            System.out.println("project : "+project.getName()+" / "+project.getAuthor()+" / "+project.getVersion()+" / "+project);
+        }
     }
 
     public static void changeWindow(Parent root){
