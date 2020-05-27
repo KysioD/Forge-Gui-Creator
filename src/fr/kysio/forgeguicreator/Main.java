@@ -11,10 +11,13 @@ public class Main extends Application {
 
     public static Stage stage;
 
+    public static Application application;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         FilesManager.initFiles();
         stage = primaryStage;
+        application = this;
 
         Parent root = null;
         if(FilesManager.getprojects().size() < 0) {
