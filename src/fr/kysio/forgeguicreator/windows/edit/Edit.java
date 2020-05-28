@@ -1,5 +1,9 @@
 package fr.kysio.forgeguicreator.windows.edit;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import fr.kysio.forgeguicreator.Project;
 import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
@@ -12,7 +16,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import javax.swing.event.HyperlinkEvent;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +48,11 @@ public class Edit{
     @FXML
     public TreeView<String> files;
 
+    @FXML
+    public TextArea textEdit;
+
+    public File editedFile = null;
+
     public void initialize(){
         nameMenu.setText(Projects.project.getName());
 
@@ -66,6 +78,38 @@ public class Edit{
 
     }
 
+    public void fileEditorUpdated(){
+        FilesManager.updateFile(editedFile, textEdit.getText());
+    }
+
+    public void update(){
+        if(editedFile == null) return;
+
+        String[] args = editedFile.getName().split("\\.");
+        if(args[args.length-1].equals("json")){
+            try {
+                System.out.println("EDITING .JSON FILE");
+                emptyPane.setVisible(false);
+                editPane.setVisible(false);
+                txtPane.setVisible(true);
+
+                DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
+
+                String txt = dis.readUTF();
+
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                JsonParser jp = new JsonParser();
+                JsonElement je = jp.parse(txt);
+                String prettyJsonString = gson.toJson(je);
+
+                textEdit.clear();
+                textEdit.appendText(prettyJsonString);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void selectFile(){
         TreeItem<String> item = files.getEditingItem();
         if(item != null){
@@ -73,9 +117,21 @@ public class Edit{
             String name = Projects.project.getName();
             File projectFolder = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name);
 
-            while (item.getParent() != files.getRoot()){
+            String access = "/"+item.getValue();
 
+            while (item.getParent() != files.getRoot()){
+                item = item.getParent();
+                String str = access;
+                access = "/"+item.getValue()+access;
             }
+
+            System.out.println("Path :"+projectFolder.getPath()+access);
+            File file = new File(projectFolder.getPath()+access);
+            if(!file.isDirectory()){
+                editedFile = file;
+            }
+
+            update();
         }
     }
 

@@ -75,13 +75,13 @@
       </BorderPane>
    </right>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030; -fx-border-color: white;" BorderPane.alignment="CENTER">
+      <BorderPane onKeyReleased="#fileEditorUpdated" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030; -fx-border-color: white;" BorderPane.alignment="CENTER">
          <center>
             <AnchorPane maxHeight="500.0" maxWidth="700.0" minHeight="500.0" minWidth="700.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" BorderPane.alignment="CENTER">
                <children>
                   <AnchorPane fx:id="txtPane" prefHeight="501.0" prefWidth="701.0" visible="false">
                      <children>
-                        <TextArea prefHeight="502.0" prefWidth="701.0" style="-fx-background-color: gray;" />
+                        <TextArea fx:id="textEdit" onKeyPressed="#fileEditorUpdated" prefHeight="502.0" prefWidth="701.0" style="-fx-background-color: gray;" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="editPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" visible="false" />

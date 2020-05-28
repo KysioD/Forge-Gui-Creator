@@ -37,11 +37,13 @@ public class Projects {
     }
 
     public void update(){
-        project = projects.get(selectedProject);
+        if(projects.size() > 0) {
+            project = projects.get(selectedProject);
 
-        name.setText(project.getName());
-        author.setText(project.getAuthor());
-        version.setText(project.getVersion());
+            name.setText(project.getName());
+            author.setText(project.getAuthor());
+            version.setText(project.getVersion());
+        }
     }
 
     public void nextProject(){

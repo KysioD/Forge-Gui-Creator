@@ -20,7 +20,7 @@ public class Main extends Application {
         application = this;
 
         Parent root = null;
-        if(FilesManager.getprojects().size() < 0) {
+        if(FilesManager.getprojects().size() <= 0) {
             root = FXMLLoader.load(getClass().getResource("windows/createprojects/CreateProject.fxml"));
         }else{
             root = FXMLLoader.load(getClass().getResource("windows/projects/projects.fxml"));

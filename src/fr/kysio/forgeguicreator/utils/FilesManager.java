@@ -2,6 +2,7 @@ package fr.kysio.forgeguicreator.utils;
 
 import com.google.gson.Gson;
 import fr.kysio.forgeguicreator.Project;
+import fr.kysio.forgeguicreator.windows.projects.Projects;
 import sun.java2d.cmm.Profile;
 
 import java.io.*;
@@ -55,6 +56,27 @@ public class FilesManager {
         System.out.println("project deleted");
     }
 
+    public static void updateFile(File f, String content){
+        if(!f.exists() || Projects.project.getName() == null) return;
+
+        String path = f.getPath();
+
+        f.delete();
+
+        try {
+            File file = new File(path);
+
+            file.createNewFile();
+
+            DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+            dos.writeUTF(content);
+
+            dos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateProject(String name, String newName, String newAuthor, String newVersion){
         Gson gson = new Gson();
 
@@ -104,6 +126,7 @@ public class FilesManager {
 
         return projects;
     }
+
 
     public static Project getProject(String name){
         Gson gson = new Gson();
