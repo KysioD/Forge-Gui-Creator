@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -84,14 +85,30 @@
                         <TextArea fx:id="textEdit" onKeyPressed="#fileEditorUpdated" prefHeight="502.0" prefWidth="701.0" style="-fx-background-color: gray;" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="editPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" visible="false" />
-                  <AnchorPane fx:id="emptyPane" prefHeight="501.0" prefWidth="700.0" style="-fx-background-color: gray;">
+                  <AnchorPane fx:id="editPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" />
+                  <AnchorPane fx:id="emptyPane" prefHeight="501.0" prefWidth="700.0" style="-fx-background-color: gray;" visible="false">
                      <children>
                         <Label layoutX="120.0" layoutY="243.0" text="Pour commencer à travailler, sélectionnez un fichier dans la hiérarchie" textFill="WHITE" />
                      </children>
                   </AnchorPane>
                </children></AnchorPane>
          </center>
+         <bottom>
+            <HBox fx:id="vueChange" prefHeight="26.0" prefWidth="779.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="Vue JSON">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" text="Vue graphique">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
    </center>
 </BorderPane>

@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import javax.swing.event.HyperlinkEvent;
@@ -50,6 +51,9 @@ public class Edit{
 
     @FXML
     public TextArea textEdit;
+
+    @FXML
+    public HBox vueChange;
 
     public File editedFile = null;
 
@@ -91,6 +95,7 @@ public class Edit{
                 System.out.println("EDITING .JSON FILE");
                 emptyPane.setVisible(false);
                 editPane.setVisible(false);
+                vueChange.setVisible(false);
                 txtPane.setVisible(true);
 
                 DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
