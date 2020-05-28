@@ -55,7 +55,7 @@ public class Edit implements EventHandler<MouseEvent>{
     @Override
     public void handle(MouseEvent event) {
         System.out.println(event.getEventType());
-        if(event.getEventType().equals(MouseEvent.MOUSE_CLICKED) && event.getSource() instanceof GuiControl){
+        if(event.getSource() instanceof GuiControl){
             System.out.println("GuiControl");
             if(selectedControl != null){
                 for(GuiControlOption guiControlOption : selectedControl.getOptions()){
@@ -80,6 +80,7 @@ public class Edit implements EventHandler<MouseEvent>{
                 selectedControl.setPrefSize(100, 50);
                 selectedControl.setStyle("-fx-background-color: gray;");
                 selectedControl.setOnMouseDragged(new MouseManager(selectedControl));
+                selectedControl.setOnMouseClicked(this::handle);
 
                 mainPane.getChildren().add(selectedControl);
             }catch (Exception e){

@@ -15,7 +15,9 @@ public class MouseManager implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent event) {
         System.out.println("HANDLE "+event.getEventType());
-        guiControl.setLayoutX(event.getX());
-        guiControl.setLayoutY(event.getY());
+        if(event.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
+            guiControl.setLayoutX(event.getX());
+            guiControl.setLayoutY(event.getY());
+        }
     }
 }

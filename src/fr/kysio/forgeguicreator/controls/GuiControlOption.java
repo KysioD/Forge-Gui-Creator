@@ -13,10 +13,15 @@ public class GuiControlOption{
 
     public Control control;
 
-    public GuiControlOption(String name, Pane pane, Control control){
+    public GuiControlOption(String name, Pane pane, Control control, int id){
         this.name = name;
         this.pane = pane;
         this.control = control;
+
+        control.setLayoutX(30);
+        control.setLayoutY(30*id);
+
+        pane.getChildren().add(control);
 
         control.setVisible(false);
     }

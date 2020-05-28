@@ -28,14 +28,6 @@ public abstract class GuiControl extends AnchorPane {
             option.control.setVisible(false);
         }
 
-        //this.setOnDragEntered(dragManager);
-
-        /*this.setText(name);
-        this.setLayoutX(20);
-        this.setLayoutY(25);*/
-
-        //pane.getChildren().add(this);
-
         getOptions();
     }
 
