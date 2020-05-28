@@ -78,7 +78,7 @@ public class Edit implements EventHandler<MouseEvent>{
                 selectedControl.setLayoutX(0);
                 selectedControl.setLayoutY(0);
                 selectedControl.setPrefSize(100, 50);
-                selectedControl.setStyle("-fx-background-color: gray;");
+                selectedControl.setStyle("-fx-background-color: #FF666666;");
                 selectedControl.setOnMouseDragged(new MouseManager(selectedControl));
                 selectedControl.setOnMouseClicked(this::handle);
 
