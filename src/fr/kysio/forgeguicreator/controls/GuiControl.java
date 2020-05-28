@@ -2,15 +2,24 @@ package fr.kysio.forgeguicreator.controls;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
-public abstract class GuiControl extends Button {
+public abstract class GuiControl extends AnchorPane {
 
     public String name;
     public Pane pane;
     public Pane optionsPane;
+
+    public void setSelected(boolean bool){
+
+    }
+
+    public boolean isSelected(){
+        return false;
+    }
 
     public GuiControl(String name, Pane pane, Pane optionspane){
         this.name = name;
@@ -21,11 +30,11 @@ public abstract class GuiControl extends Button {
             option.control.setVisible(false);
         }
 
-        this.setText(name);
+        /*this.setText(name);
         this.setLayoutX(20);
-        this.setLayoutY(25);
+        this.setLayoutY(25);*/
 
-        pane.getChildren().add(this);
+        //pane.getChildren().add(this);
 
         getOptions();
     }

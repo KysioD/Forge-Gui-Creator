@@ -7,14 +7,13 @@ import javafx.scene.paint.Color;
 
 public class ColorPickerOption extends GuiControlOption {
 
-    public ColorPickerOption(String name, Pane pane) {
+    public ColorPickerOption(String name, Pane pane, int id) {
         super(name, pane, new ColorPicker(Color.WHITE));
 
         control.setLayoutX(30);
-        control.setLayoutY(50);
+        control.setLayoutY(20*id);
 
         pane.getChildren().add(control);
 
-        System.out.println("COLOR PICKER DRAWED");
     }
 }
