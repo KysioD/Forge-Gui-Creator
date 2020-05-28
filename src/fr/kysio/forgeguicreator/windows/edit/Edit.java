@@ -43,7 +43,6 @@ public class Edit implements EventHandler<MouseEvent>{
         Button rectangle = new Button("Rectangle");
         rectangle.setOnMouseClicked(this);
         rectangle.setOnDragDetected(this);
-        rectangle.setOnDragDone(new DragManager());
 
         rectangle.setLayoutX(20);
         rectangle.setLayoutY(25);
@@ -80,6 +79,7 @@ public class Edit implements EventHandler<MouseEvent>{
                 selectedControl.setLayoutY(0);
                 selectedControl.setPrefSize(100, 50);
                 selectedControl.setStyle("-fx-background-color: gray;");
+                selectedControl.setOnMouseDragged(new MouseManager(selectedControl));
 
                 mainPane.getChildren().add(selectedControl);
             }catch (Exception e){

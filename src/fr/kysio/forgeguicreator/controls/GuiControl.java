@@ -1,7 +1,5 @@
 package fr.kysio.forgeguicreator.controls;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -29,6 +27,8 @@ public abstract class GuiControl extends AnchorPane {
         for(GuiControlOption option : getOptions()){
             option.control.setVisible(false);
         }
+
+        //this.setOnDragEntered(dragManager);
 
         /*this.setText(name);
         this.setLayoutX(20);
