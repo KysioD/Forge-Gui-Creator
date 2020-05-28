@@ -38,7 +38,7 @@
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="711.0" prefWidth="245.0" style="-fx-background-color: #303030;">
                                  <children>
                                     <Label layoutX="97.0" layoutY="6.0" text="Fichiers" textFill="WHITE" />
-                                    <TreeView fx:id="files" editable="true" layoutY="22.0" prefHeight="300.0" prefWidth="228.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" />
+                                    <TreeView fx:id="files" editable="true" layoutY="22.0" onMouseClicked="#selectFile" prefHeight="300.0" prefWidth="228.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" />
                                  </children></AnchorPane>
                           </content>
                         </ScrollPane>

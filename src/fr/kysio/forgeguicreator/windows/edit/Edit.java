@@ -66,6 +66,19 @@ public class Edit{
 
     }
 
+    public void selectFile(){
+        TreeItem<String> item = files.getEditingItem();
+        if(item != null){
+            System.out.println(item);
+            String name = Projects.project.getName();
+            File projectFolder = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name);
+
+            while (item.getParent() != files.getRoot()){
+
+            }
+        }
+    }
+
     public void folderTree(File file, TreeItem<String> item){
         if(file.listFiles() != null) {
             for (File f : file.listFiles()) {
