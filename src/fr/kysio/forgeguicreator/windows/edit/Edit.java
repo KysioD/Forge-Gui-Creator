@@ -101,6 +101,40 @@ public class Edit{
         FilesManager.updateFile(editedFile, textEdit.getText());
     }
 
+    public void vueGraphic(){
+        try {
+            emptyPane.setVisible(false);
+            editPane.setVisible(true);
+            vueChange.setVisible(true);
+            txtPane.setVisible(false);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void vueJson(){
+        try {
+            emptyPane.setVisible(false);
+            editPane.setVisible(false);
+            vueChange.setVisible(true);
+            txtPane.setVisible(true);
+
+            DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
+
+            String txt = dis.readUTF();
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonParser jp = new JsonParser();
+            JsonElement je = jp.parse(txt);
+            String prettyJsonString = gson.toJson(je);
+
+            textEdit.clear();
+            textEdit.appendText(prettyJsonString);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void update(){
         if(editedFile == null) return;
 
@@ -124,6 +158,12 @@ public class Edit{
 
                 textEdit.clear();
                 textEdit.appendText(prettyJsonString);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }else if(args[args.length-1].equals("gui")){
+            try {
+                vueGraphic();
             }catch (Exception e){
                 e.printStackTrace();
             }

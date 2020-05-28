@@ -96,12 +96,12 @@
          <bottom>
             <HBox fx:id="vueChange" prefHeight="26.0" prefWidth="779.0" visible="false" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="Vue JSON">
+                  <Button mnemonicParsing="false" onAction="#vueJson" text="Vue JSON">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Vue graphique">
+                  <Button mnemonicParsing="false" onAction="#vueGraphic" text="Vue graphique">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>

@@ -91,6 +91,8 @@ public class FilesManager {
         if(!f.exists() || Projects.project.getName() == null) return;
 
         String path = f.getPath();
+        String[] args = f.getName().split("\\.");
+        //String extension = args[args.length-1];
 
         f.delete();
 
