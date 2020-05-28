@@ -10,9 +10,9 @@
         <menus>
             <Menu fx:id="nameMenu" disable="true" mnemonicParsing="false" style="color: white;" text="Menu name" />
           <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#createGui" text="Create GUI file" />
+               </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
@@ -85,8 +85,8 @@
                         <TextArea fx:id="textEdit" onKeyPressed="#fileEditorUpdated" prefHeight="502.0" prefWidth="701.0" style="-fx-background-color: gray;" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="editPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" />
-                  <AnchorPane fx:id="emptyPane" prefHeight="501.0" prefWidth="700.0" style="-fx-background-color: gray;" visible="false">
+                  <AnchorPane fx:id="editPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" visible="false" />
+                  <AnchorPane fx:id="emptyPane" prefHeight="501.0" prefWidth="700.0" style="-fx-background-color: gray;">
                      <children>
                         <Label layoutX="120.0" layoutY="243.0" text="Pour commencer à travailler, sélectionnez un fichier dans la hiérarchie" textFill="WHITE" />
                      </children>
@@ -94,7 +94,7 @@
                </children></AnchorPane>
          </center>
          <bottom>
-            <HBox fx:id="vueChange" prefHeight="26.0" prefWidth="779.0" BorderPane.alignment="CENTER">
+            <HBox fx:id="vueChange" prefHeight="26.0" prefWidth="779.0" visible="false" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" text="Vue JSON">
                      <HBox.margin>

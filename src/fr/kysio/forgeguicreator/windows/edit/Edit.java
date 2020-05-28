@@ -56,10 +56,16 @@ public class Edit{
     public HBox vueChange;
 
     public File editedFile = null;
+    public File selectedFolder = null;
 
     public void initialize(){
         nameMenu.setText(Projects.project.getName());
 
+        generateTree();
+
+    }
+
+    public void generateTree(){
         String name = Projects.project.getName();
         File projectFolder = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name);
 
@@ -79,7 +85,16 @@ public class Edit{
         }
 
         files.setRoot(item);
+    }
 
+    public void createGui(){
+        System.out.println("CREATE GUI INTO "+selectedFolder);
+        if(selectedFolder != null){
+            FilesManager.createGuiFile(selectedFolder, "untitled");
+        }
+
+        generateTree();
+        update();
     }
 
     public void fileEditorUpdated(){
@@ -122,18 +137,22 @@ public class Edit{
             String name = Projects.project.getName();
             File projectFolder = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name);
 
-            String access = "/"+item.getValue();
 
-            while (item.getParent() != files.getRoot()){
-                item = item.getParent();
-                String str = access;
-                access = "/"+item.getValue()+access;
+            String access = "";
+            if(item != files.getRoot()){
+                access = "/"+item.getValue();
+                while (item.getParent() != files.getRoot()) {
+                    item = item.getParent();
+                    //String str = access;
+                    access = "/" + item.getValue() + access;
+                }
             }
-
             System.out.println("Path :"+projectFolder.getPath()+access);
             File file = new File(projectFolder.getPath()+access);
             if(!file.isDirectory()){
                 editedFile = file;
+            }else{
+                selectedFolder = file;
             }
 
             update();

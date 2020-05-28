@@ -1,7 +1,11 @@
 package fr.kysio.forgeguicreator.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.sun.prism.paint.Color;
 import fr.kysio.forgeguicreator.Project;
+import fr.kysio.forgeguicreator.guis.GuiFile;
+import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
 import sun.java2d.cmm.Profile;
 
@@ -32,6 +36,33 @@ public class FilesManager {
             }else{
                 f.delete();
             }
+        }
+    }
+
+
+    public static void createGuiFile(File directory, String name){
+        if(directory.isDirectory()){
+
+            try {
+            File file = new File(directory.getPath()+"/"+name+".gui");
+            file.createNewFile();
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            GuiFile guiFile = new GuiFile(name, new GuiControler[]{
+                    new GuiControler(0, 0, Color.RED),
+                    new GuiControler(10, 10, Color.RED)
+            });
+
+            String json = gson.toJson(guiFile);
+
+            DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+            dos.writeUTF(json);
+
+            dos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
