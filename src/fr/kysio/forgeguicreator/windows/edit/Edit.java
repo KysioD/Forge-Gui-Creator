@@ -1,31 +1,30 @@
 package fr.kysio.forgeguicreator.windows.edit;
 
-import fr.kysio.forgeguicreator.controls.GuiControl;
-import fr.kysio.forgeguicreator.controls.GuiControlOption;
-import fr.kysio.forgeguicreator.controls.controls.RectangleControl;
+import fr.kysio.forgeguicreator.Project;
+import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.Menu;
+import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import javax.swing.event.HyperlinkEvent;
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
-public class Edit implements EventHandler<MouseEvent>{
+public class Edit{
 
     @FXML
     public Menu nameMenu;
 
     @FXML
-    public Pane mainPane;
+    public Pane editPane;
 
     @FXML
     public Pane optionsPane;
@@ -33,76 +32,59 @@ public class Edit implements EventHandler<MouseEvent>{
     @FXML
     public Pane objectsPane;
 
-    public GuiControl selectedControl;
+    @FXML
+    public Pane txtPane;
 
-    public HashMap<Button, Class<?extends GuiControl>> buttons = new HashMap<>();
+    @FXML
+    public Pane emptyPane;
+
+    @FXML
+    public TreeView<String> files;
 
     public void initialize(){
         nameMenu.setText(Projects.project.getName());
 
-        Button rectangle = new Button("Rectangle");
-        rectangle.setOnMouseClicked(this);
-        rectangle.setOnDragDetected(this);
+        String name = Projects.project.getName();
+        File projectFolder = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name);
 
-        rectangle.setLayoutX(20);
-        rectangle.setLayoutY(25);
-        objectsPane.getChildren().add(rectangle);
+        TreeItem<String> item = new TreeItem<>();
+        item.setValue(name);
+        item.setExpanded(true);
 
-        buttons.put(rectangle, RectangleControl.class);
-
-    }
-
-    @Override
-    public void handle(MouseEvent event) {
-        System.out.println(event.getEventType());
-        if(event.getSource() instanceof GuiControl){
-            System.out.println("GuiControl");
-            if(selectedControl != null){
-                for(GuiControlOption guiControlOption : selectedControl.getOptions()){
-                    guiControlOption.control.setVisible(false);
+        if(projectFolder.listFiles() != null) {
+            for (File file : Objects.requireNonNull(projectFolder.listFiles())) {
+                if (file.isDirectory()) {
+                    folderTree(file, item);
+                } else {
+                    TreeItem<String> it = new TreeItem<>(file.getName());
+                    item.getChildren().add(it);
                 }
-            }
-            selectedControl = (GuiControl)event.getSource();
-
-            for(GuiControlOption guiControlOption : selectedControl.getOptions()){
-                guiControlOption.control.setVisible(true);
-            }
-        }else if(event.getEventType().equals(MouseEvent.MOUSE_CLICKED) && buttons.containsKey(event.getSource())){
-            try {
-
-                Constructor<? extends GuiControl> constructor = buttons.get(event.getSource()).getConstructor(Pane.class, Pane.class);
-
-                if(selectedControl != null) selectedControl.setSelected(false);
-
-                selectedControl = constructor.newInstance(mainPane, optionsPane);
-                selectedControl.setLayoutX(0);
-                selectedControl.setLayoutY(0);
-                selectedControl.setPrefSize(100, 50);
-                selectedControl.setStyle("-fx-background-color: #FF666666;");
-                selectedControl.setOnMouseDragged(new MouseManager(selectedControl));
-                selectedControl.setOnMouseClicked(this::handle);
-
-                mainPane.getChildren().add(selectedControl);
-            }catch (Exception e){
-                e.printStackTrace();
             }
         }
 
-            /*if(event.getEventType().equals(MouseEvent.DRAG_DETECTED)){
-            System.out.println("DRAG");
-            try {
+        files.setRoot(item);
 
-                Constructor<? extends GuiControl> constructor = buttons.get(event.getSource()).getConstructor(Pane.class, Pane.class);
+    }
 
-                selectedControl = constructor.newInstance(objectsPane, optionsPane);
-                selectedControl.setLayoutX(event.getX());
-                selectedControl.setLayoutY(event.getY());
-                selectedControl.setStyle("-fx-background-color: gray;");
+    public void folderTree(File file, TreeItem<String> item){
+        if(file.listFiles() != null) {
+            for (File f : file.listFiles()) {
+                if (f.isDirectory()) {
+                    System.out.println(f.getName()+" is a directory");
+                    TreeItem<String> it = new TreeItem<>(f.getName());
+                    it.setExpanded(true);
+                    item.getChildren().add(it);
 
-                mainPane.getChildren().add(selectedControl);
-            }catch (Exception e){
-                e.printStackTrace();
+                    folderTree(f, it);
+                } else {
+                    System.out.println(f.getName()+" is a file");
+                    TreeItem<String> it = new TreeItem<>(f.getName());
+                    item.getChildren().add(it);
+                }
             }
-        }*/
+        }else{
+            TreeItem<String> it = new TreeItem<>(file.getName());
+            item.getChildren().add(it);
+        }
     }
 }

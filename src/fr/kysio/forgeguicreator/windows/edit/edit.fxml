@@ -38,6 +38,7 @@
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="711.0" prefWidth="245.0" style="-fx-background-color: #303030;">
                                  <children>
                                     <Label layoutX="97.0" layoutY="6.0" text="Fichiers" textFill="WHITE" />
+                                    <TreeView fx:id="files" editable="true" layoutY="22.0" prefHeight="300.0" prefWidth="228.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" />
                                  </children></AnchorPane>
                           </content>
                         </ScrollPane>
@@ -76,7 +77,20 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030; -fx-border-color: white;" BorderPane.alignment="CENTER">
          <center>
-            <AnchorPane fx:id="mainPane" maxHeight="500.0" maxWidth="700.0" minHeight="500.0" minWidth="700.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white; -fx-border-color: black;" BorderPane.alignment="CENTER" />
+            <AnchorPane maxHeight="500.0" maxWidth="700.0" minHeight="500.0" minWidth="700.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="txtPane" prefHeight="501.0" prefWidth="701.0" visible="false">
+                     <children>
+                        <TextArea prefHeight="502.0" prefWidth="701.0" style="-fx-background-color: gray;" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="editPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" visible="false" />
+                  <AnchorPane fx:id="emptyPane" prefHeight="501.0" prefWidth="700.0" style="-fx-background-color: gray;">
+                     <children>
+                        <Label layoutX="120.0" layoutY="243.0" text="Pour commencer à travailler, sélectionnez un fichier dans la hiérarchie" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
          </center>
       </BorderPane>
    </center>
