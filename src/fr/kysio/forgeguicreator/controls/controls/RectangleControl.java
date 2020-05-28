@@ -21,8 +21,7 @@ public class RectangleControl extends GuiControl {
     public ArrayList<GuiControlOption> getOptions() {
         ArrayList<GuiControlOption> options = new ArrayList<>();
 
-        options.add(new ColorPickerOption("background color : ", optionsPane, 1));
-        options.add(new ColorPickerOption("border color: ", optionsPane, 2));
+        options.add(new ColorPickerOption("background color : ", optionsPane, 1, this));
 
         return options;
     }

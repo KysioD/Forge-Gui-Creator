@@ -12,11 +12,13 @@ public class GuiControlOption{
     private Pane pane;
 
     public Control control;
+    public GuiControl guiControl;
 
-    public GuiControlOption(String name, Pane pane, Control control, int id){
+    public GuiControlOption(String name, Pane pane, Control control, int id, GuiControl guiControl){
         this.name = name;
         this.pane = pane;
         this.control = control;
+        this.guiControl = guiControl;
 
         control.setLayoutX(30);
         control.setLayoutY(30*id);
