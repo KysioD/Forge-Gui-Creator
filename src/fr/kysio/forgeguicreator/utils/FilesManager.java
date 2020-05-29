@@ -38,7 +38,6 @@ public class FilesManager {
     }
 
 
-    @SuppressWarnings("unchecked")
     public static void createGuiFile(File directory, String name){
         if(directory.isDirectory()){
 

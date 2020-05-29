@@ -9,9 +9,13 @@ import fr.kysio.forgeguicreator.guis.GuiFileTypeAdapter;
 import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -40,7 +44,9 @@ public class Edit{
     public Pane emptyPane;
 
     @FXML
-    public TreeView<String> files;
+    public TreeView<String> treeView;
+
+    public static TreeView<String> files;
 
     @FXML
     public TextArea textEdit;
@@ -49,16 +55,17 @@ public class Edit{
     public HBox vueChange;
 
     public File editedFile = null;
-    public File selectedFolder = null;
+    public static File selectedFolder = null;
 
     public void initialize(){
         nameMenu.setText(Projects.project.getName());
+        Edit.files = treeView;
 
         generateTree();
 
     }
 
-    public void generateTree(){
+    public static void generateTree(){
         String name = Projects.project.getName();
         File projectFolder = new File(System.getProperty("user.home") + "/gui-creator/projects/" + name);
 
@@ -77,17 +84,33 @@ public class Edit{
             }
         }
 
-        files.setRoot(item);
+        Edit.files.setRoot(item);
     }
+
+    public static Stage popup;
 
     public void createGui(){
         System.out.println("CREATE GUI INTO "+selectedFolder);
-        if(selectedFolder != null){
-            FilesManager.createGuiFile(selectedFolder, "untitled");
-        }
+        try {
+            if(selectedFolder != null) {
+                popup = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("creategui/creategui.fxml"));
 
-        generateTree();
-        update();
+                popup.setTitle("Create gui into " + selectedFolder.getName());
+                popup.setScene(new Scene(root));
+                popup.setResizable(false);
+                popup.centerOnScreen();
+                popup.show();
+
+                update();
+            }
+        }catch (Exception e) {
+        }
+        /*if(selectedFolder != null){
+            FilesManager.createGuiFile(selectedFolder, "untitled");
+        }*/
+
+        //generateTree();
     }
 
     public void fileEditorUpdated(){
@@ -146,6 +169,8 @@ public class Edit{
 
     public void update(){
         if(editedFile == null) return;
+
+        generateTree();
 
         String[] args = editedFile.getName().split("\\.");
         if(args[args.length-1].equals("json")){
@@ -208,7 +233,7 @@ public class Edit{
         }
     }
 
-    public void folderTree(File file, TreeItem<String> item){
+    public static void folderTree(File file, TreeItem<String> item){
         if(file.listFiles() != null) {
             for (File f : file.listFiles()) {
                 if (f.isDirectory()) {
