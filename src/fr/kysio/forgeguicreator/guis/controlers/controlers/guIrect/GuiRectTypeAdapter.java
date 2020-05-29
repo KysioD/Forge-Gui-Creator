@@ -6,6 +6,7 @@ import com.google.gson.stream.JsonWriter;
 import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControlerTypeAdapter;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
@@ -24,6 +25,28 @@ public class GuiRectTypeAdapter extends TypeAdapter<GuiControler> {
 
     @Override
     public GuiControler read(JsonReader reader) throws IOException {
-        return null;
+        //reader.beginObject();
+        int backgroundColorR = 0;
+        int backgroundColorG = 0 ;
+        int backgroundColorB = 0;
+        GuiControler controler = new GuiControlerTypeAdapter().read(reader);
+
+        while (reader.hasNext()){
+            switch (reader.nextName()){
+                case "backgroundColor_r":
+                    backgroundColorR = reader.nextInt();
+                case "backgroundColor_g":
+                    backgroundColorG = reader.nextInt();
+                case "backgroundColor_b":
+                    backgroundColorB = reader.nextInt();
+                default:
+                    reader.skipValue();
+                    break;
+            }
+        }
+        //reader.endObject();
+
+
+        return new GuiRect(controler.x, controler.y, new Color(backgroundColorR, backgroundColorG, backgroundColorB, 1));
     }
 }

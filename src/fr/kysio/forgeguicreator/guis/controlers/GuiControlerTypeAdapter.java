@@ -18,7 +18,7 @@ public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
 
     @Override
     public GuiControler read(JsonReader reader) throws IOException {
-        reader.beginObject();
+        //reader.beginObject();
         int x = 0;
         int y = 0;
         GuiControlers type = null;
@@ -39,7 +39,7 @@ public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
                     break;
             }
         }
-        reader.endObject();
+        //reader.endObject();
 
         return new GuiControler(type, x, y);
     }
