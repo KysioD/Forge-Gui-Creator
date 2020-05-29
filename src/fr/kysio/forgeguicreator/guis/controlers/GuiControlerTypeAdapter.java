@@ -9,11 +9,11 @@ import java.io.IOException;
 public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
     @Override
     public void write(JsonWriter writer, GuiControler guiControler) throws IOException {
-        writer.beginObject();
+        //writer.beginObject();
         writer.name("x").value(guiControler.x);
         writer.name("y").value(guiControler.y);
         writer.name("type").value(guiControler.type.name());
-        writer.endObject();
+        //writer.endObject();
     }
 
     @Override

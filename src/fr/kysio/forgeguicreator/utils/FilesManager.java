@@ -46,14 +46,14 @@ public class FilesManager {
             File file = new File(directory.getPath()+"/"+name+".gui");
             file.createNewFile();
 
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
             ArrayList<GuiControler> guiControlers = new ArrayList<>();
 
-            guiControlers.add(new GuiRect(0, 0, Color.RED, 2));
-            guiControlers.add(new GuiRect(10, 10, Color.WHITE, 4));
+            guiControlers.add(new GuiRect(0, 0, Color.RED));
+            guiControlers.add(new GuiRect(10, 10, Color.WHITE));
 
             GuiFile guiFile = new GuiFile(name, guiControlers);
+
+            Gson gson = guiFile.createGsonInstance();
 
             String json = gson.toJson(guiFile);
 

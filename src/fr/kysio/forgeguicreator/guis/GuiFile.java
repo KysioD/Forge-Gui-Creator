@@ -26,12 +26,4 @@ public class GuiFile {
                 .create();
     }
 
-    public void serializeGuiFile(){
-
-    }
-
-    public void deserializeGuiFile(){
-
-    }
-
 }
