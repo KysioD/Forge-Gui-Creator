@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import fr.kysio.forgeguicreator.guis.GuiFile;
+import fr.kysio.forgeguicreator.guis.GuiFileTypeAdapter;
 import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
 import javafx.fxml.FXML;
@@ -104,7 +105,12 @@ public class Edit{
 
             String txt = dis.readUTF();
 
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(GuiFile.class, new GuiFileTypeAdapter())
+                    .setPrettyPrinting()
+                    .serializeNulls()
+                    .disableHtmlEscaping()
+                    .create();;
             GuiFile guiFile = gson.fromJson(txt, GuiFile.class);
 
             System.out.println(guiFile);
