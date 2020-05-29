@@ -4,26 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import fr.kysio.forgeguicreator.Project;
+import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
-import javax.swing.event.HyperlinkEvent;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class Edit{
@@ -107,6 +99,17 @@ public class Edit{
             editPane.setVisible(true);
             vueChange.setVisible(true);
             txtPane.setVisible(false);
+
+            DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
+
+            String txt = dis.readUTF();
+
+            Gson gson = new Gson();
+            GuiFile guiFile = gson.fromJson(txt, GuiFile.class);
+
+            System.out.println(guiFile);
+            System.out.println(guiFile.guiControlers);
+
         }catch (Exception e){
             e.printStackTrace();
         }

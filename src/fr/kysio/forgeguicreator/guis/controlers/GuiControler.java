@@ -1,17 +1,18 @@
 package fr.kysio.forgeguicreator.guis.controlers;
 
-import com.sun.prism.paint.Color;
+
+import javafx.scene.paint.Color;
 
 public class GuiControler {
 
     public int x;
     public int y;
-    public Color bakgroundColor;
+    public GuiControlers type;
 
-    public GuiControler(int x, int y, Color backgoundColor){
+    public GuiControler(GuiControlers type, int x, int y){
+        this.type = type;
         this.x = x;
         this.y = y;
-        this.bakgroundColor = backgoundColor;
     }
 
 }

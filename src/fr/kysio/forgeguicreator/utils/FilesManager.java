@@ -2,16 +2,14 @@ package fr.kysio.forgeguicreator.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.prism.paint.Color;
 import fr.kysio.forgeguicreator.Project;
 import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
+import fr.kysio.forgeguicreator.guis.controlers.controlers.guIrect.GuiRect;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
-import sun.java2d.cmm.Profile;
+import javafx.scene.paint.Color;
 
 import java.io.*;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class FilesManager {
@@ -40,6 +38,7 @@ public class FilesManager {
     }
 
 
+    @SuppressWarnings("unchecked")
     public static void createGuiFile(File directory, String name){
         if(directory.isDirectory()){
 
@@ -48,10 +47,13 @@ public class FilesManager {
             file.createNewFile();
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            GuiFile guiFile = new GuiFile(name, new GuiControler[]{
-                    new GuiControler(0, 0, Color.RED),
-                    new GuiControler(10, 10, Color.RED)
-            });
+
+            ArrayList<GuiControler> guiControlers = new ArrayList<>();
+
+            guiControlers.add(new GuiRect(0, 0, Color.RED, 2));
+            guiControlers.add(new GuiRect(10, 10, Color.WHITE, 4));
+
+            GuiFile guiFile = new GuiFile(name, guiControlers);
 
             String json = gson.toJson(guiFile);
 
