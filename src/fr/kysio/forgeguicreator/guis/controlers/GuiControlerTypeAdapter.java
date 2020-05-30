@@ -9,11 +9,16 @@ import java.io.IOException;
 public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
     @Override
     public void write(JsonWriter writer, GuiControler guiControler) throws IOException {
-        writer.beginObject();
         writer.name("x").value(guiControler.x);
         writer.name("y").value(guiControler.y);
-        writer.name("type").value(guiControler.type.name());
-        writer.endObject();
+        //writer.name("type").value(guiControler.type.name());
+    }
+
+    public GuiControlers guiControlers;
+
+    public GuiControler customRread(JsonReader reader, GuiControlers controlers) throws IOException {
+        this.guiControlers = controlers;
+        return read(reader);
     }
 
     @Override
@@ -21,9 +26,9 @@ public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
         //reader.beginObject();
         int x = 0;
         int y = 0;
-        GuiControlers type = null;
+        GuiControlers type = guiControlers;
 
-        while(reader.hasNext()){
+        //while(reader.hasNext()){
             switch (reader.nextName()){
                 case "x":
                     x = reader.nextInt();
@@ -31,14 +36,22 @@ public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
                 case "y":
                     y = reader.nextInt();
                     break;
-                case "type":
-                    type = GuiControlers.valueOf(reader.nextString().toUpperCase());
+                default:
+                    reader.skipValue();
+                    break;
+            }
+            switch (reader.nextName()){
+                case "x":
+                    x = reader.nextInt();
+                    break;
+                case "y":
+                    y = reader.nextInt();
                     break;
                 default:
                     reader.skipValue();
                     break;
             }
-        }
+        //}
         //reader.endObject();
 
         return new GuiControler(type, x, y, null);

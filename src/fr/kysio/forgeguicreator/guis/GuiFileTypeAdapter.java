@@ -15,20 +15,18 @@ public class GuiFileTypeAdapter extends TypeAdapter<GuiFile> {
     public void write(JsonWriter writer, GuiFile guiFile) throws IOException {
         writer.beginObject();
         writer.name("name").value(guiFile.name);
-            writer.name("guiControllers").beginArray();
-                for(GuiControler guiControler : guiFile.guiControlers){
-                    try {
-                        writer.beginObject();
-                        writer.name("type").value(guiControler.type.name());
-                        writer.endObject();
+        writer.name("guiControllers").beginArray();
+            for(GuiControler guiControler : guiFile.guiControlers){
+                try {
+                    writer.beginObject();
+                    writer.name("type").value(guiControler.type.name());
                         guiControler.type.getGuiRectTypeAdapterClass().newInstance().write(writer, guiControler);
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+                    writer.endObject();
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-            writer.endArray();
+            }
+        writer.endArray();
         writer.endObject();
     }
 
@@ -47,25 +45,24 @@ public class GuiFileTypeAdapter extends TypeAdapter<GuiFile> {
                     reader.beginArray();
                         while(reader.hasNext()){
                             reader.beginObject();
-                            while (reader.hasNext()){
+                            //while (reader.hasNext()){
                                 switch (reader.nextName()){
                                     case "type":
-                                        GuiControlers controlerType = GuiControlers.valueOf(reader.nextString().toUpperCase());
-                                        try {
-                                            controlers.add(controlerType.getGuiRectTypeAdapterClass().newInstance().read(reader));
-                                        } catch (InstantiationException e) {
-                                            e.printStackTrace();
-                                        } catch (IllegalAccessException e) {
-                                            e.printStackTrace();
-                                        }
-
+                                            System.out.println("TYPE FOUND ");
+                                            GuiControlers controlerType = GuiControlers.valueOf(reader.nextString().toUpperCase());
+                                            try {
+                                                controlers.add(controlerType.getGuiRectTypeAdapterClass().newInstance().customRread(reader, controlerType));
+                                            } catch (InstantiationException e) {
+                                                e.printStackTrace();
+                                            } catch (IllegalAccessException e) {
+                                                e.printStackTrace();
+                                            }
                                         break;
                                     default:
                                         reader.skipValue();
                                         break;
                                 }
-                            }
-
+                            //}
                             reader.endObject();
                         }
                         reader.endArray();
