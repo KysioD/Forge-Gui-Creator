@@ -47,8 +47,8 @@ public class FilesManager {
 
             ArrayList<GuiControler> guiControlers = new ArrayList<>();
 
-            guiControlers.add(new GuiRect(0, 0, 100, 20, Color.RED));
-            guiControlers.add(new GuiRect(10, 10, 50 ,50, Color.WHITE));
+            guiControlers.add(new GuiRect(0, 0, 100, 20, Color.RED, null));
+            guiControlers.add(new GuiRect(10, 10, 50 ,50, Color.WHITE, null));
 
             GuiFile guiFile = new GuiFile(name, guiControlers);
 
@@ -92,7 +92,7 @@ public class FilesManager {
         if(!f.exists() || Projects.project.getName() == null) return;
 
         String path = f.getPath();
-        String[] args = f.getName().split("\\.");
+        //String[] args = f.getName().split("\\.");
         //String extension = args[args.length-1];
 
         f.delete();

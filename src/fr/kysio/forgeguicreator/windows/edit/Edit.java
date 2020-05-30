@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.GuiFileTypeAdapter;
+import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
 import javafx.fxml.FXML;
@@ -135,6 +136,11 @@ public class Edit{
                     .disableHtmlEscaping()
                     .create();;
             GuiFile guiFile = gson.fromJson(txt, GuiFile.class);
+
+            for(GuiControler controler : guiFile.guiControlers){
+                controler.editPane = editPane;
+                controler.enable();
+            }
 
             System.out.println(guiFile);
             System.out.println(guiFile.guiControlers);

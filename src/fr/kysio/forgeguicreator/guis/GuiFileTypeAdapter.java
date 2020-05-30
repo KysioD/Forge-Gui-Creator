@@ -18,6 +18,9 @@ public class GuiFileTypeAdapter extends TypeAdapter<GuiFile> {
             writer.name("guiControllers").beginArray();
                 for(GuiControler guiControler : guiFile.guiControlers){
                     try {
+                        writer.beginObject();
+                        writer.name("type").value(guiControler.type.name());
+                        writer.endObject();
                         guiControler.type.getGuiRectTypeAdapterClass().newInstance().write(writer, guiControler);
                     } catch (InstantiationException e) {
                         e.printStackTrace();
@@ -62,6 +65,7 @@ public class GuiFileTypeAdapter extends TypeAdapter<GuiFile> {
                                         break;
                                 }
                             }
+
                             reader.endObject();
                         }
                         reader.endArray();
