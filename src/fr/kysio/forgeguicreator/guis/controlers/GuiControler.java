@@ -1,8 +1,12 @@
 package fr.kysio.forgeguicreator.guis.controlers;
 
 
+import fr.kysio.forgeguicreator.guis.options.GuiOption;
+import fr.kysio.forgeguicreator.guis.options.GuiOptions;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 public class GuiControler {
 
@@ -20,6 +24,7 @@ public class GuiControler {
     }
 
     public void draw() {
+
     }
 
     public void enable(){
@@ -28,6 +33,10 @@ public class GuiControler {
 
     public void disable(){
 
+    }
+
+    public ArrayList<GuiOptions> guiOptions(){
+        return new ArrayList<>();
     }
 
 }

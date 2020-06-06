@@ -3,9 +3,12 @@ package fr.kysio.forgeguicreator.guis.controlers.controlers.guIrect;
 import com.sun.istack.internal.Nullable;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControlers;
+import fr.kysio.forgeguicreator.guis.options.GuiOption;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 public class GuiRect extends GuiControler {
 
@@ -58,5 +61,8 @@ public class GuiRect extends GuiControler {
         }
     }
 
-
+    @Override
+    public ArrayList<GuiOption> guiOptions() {
+        return super.guiOptions();
+    }
 }
