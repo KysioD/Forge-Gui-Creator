@@ -47,10 +47,13 @@ public class FilesManager {
 
             ArrayList<GuiControler> guiControlers = new ArrayList<>();
 
-            guiControlers.add(new GuiRect(0, 0, 100, 20, Color.RED, null));
-            guiControlers.add(new GuiRect(10, 10, 50 ,50, Color.WHITE, null));
+            guiControlers.add(new GuiRect(null, 0, 0, 100, 20, Color.RED, null, null, null));
+            guiControlers.add(new GuiRect(null, 10, 10, 50 ,50, Color.WHITE, null, null, null));
 
             GuiFile guiFile = new GuiFile(name, guiControlers);
+
+            guiControlers.get(0).guiFile = guiFile;
+            guiControlers.get(1).guiFile = guiFile;
 
             Gson gson = guiFile.createGsonInstance();
 

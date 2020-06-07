@@ -1,9 +1,12 @@
 package fr.kysio.forgeguicreator.guis.controlers.controlers.guIrect;
 
 import com.sun.istack.internal.Nullable;
+import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControlers;
 import fr.kysio.forgeguicreator.guis.options.GuiOption;
+import fr.kysio.forgeguicreator.guis.options.GuiOptions;
+import fr.kysio.forgeguicreator.guis.options.options.positionOption.GuiPositionOption;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -19,8 +22,8 @@ public class GuiRect extends GuiControler {
 
     public AnchorPane pane;
 
-    public GuiRect(int x, int y, int width, int height, Color backgoundColor, @Nullable Pane editPane) {
-        super(GuiControlers.GUI_RECT, x, y, editPane);
+    public GuiRect(GuiFile guiFile, int x, int y, int width, int height, Color backgoundColor, @Nullable Pane editPane, @Nullable Pane controlerPane, @Nullable Pane optionsPane) {
+        super(guiFile, GuiControlers.GUI_RECT, x, y, editPane, controlerPane, optionsPane);
         this.backgroundColor = backgoundColor;
         this.width = width;
         this.height = height;
@@ -46,6 +49,7 @@ public class GuiRect extends GuiControler {
         System.out.println("Background color : "+backgroundColor);
 
         editPane.getChildren().add(pane);
+        pane.setOnMouseClicked(this);
     }
 
     @Override
@@ -63,6 +67,8 @@ public class GuiRect extends GuiControler {
 
     @Override
     public ArrayList<GuiOption> guiOptions() {
-        return super.guiOptions();
+        ArrayList<GuiOption> guiOptions = new ArrayList<>();
+        guiOptions.add(new GuiPositionOption(5, 5, this));
+        return guiOptions;
     }
 }

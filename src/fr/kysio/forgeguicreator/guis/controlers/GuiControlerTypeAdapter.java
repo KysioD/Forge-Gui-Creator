@@ -54,6 +54,6 @@ public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
         //}
         //reader.endObject();
 
-        return new GuiControler(type, x, y, null);
+        return new GuiControler(null, type, x, y, null, null, null);
     }
 }

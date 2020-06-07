@@ -75,6 +75,6 @@ public class GuiRectTypeAdapter extends TypeAdapter<GuiControler> {
         System.out.println("READED COLOR : "+backgroundColorR+" "+backgroundColorG+" "+backgroundColorB);
         System.out.println(width);
 
-        return new GuiRect(controler.x, controler.y, width, height, new Color(backgroundColorR, backgroundColorG, backgroundColorB, 1), null);
+        return new GuiRect(null, controler.x, controler.y, width, height, new Color(backgroundColorR, backgroundColorG, backgroundColorB, 1), null, null, null);
     }
 }

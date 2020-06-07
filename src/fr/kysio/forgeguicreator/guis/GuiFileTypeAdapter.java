@@ -74,6 +74,11 @@ public class GuiFileTypeAdapter extends TypeAdapter<GuiFile> {
         System.out.println("Name : "+name);
         System.out.println("Controlers : "+controlers);
 
-        return new GuiFile(name, controlers);
+        GuiFile guiFile = new GuiFile(name, controlers);
+        for(GuiControler controler : guiFile.guiControlers){
+            controler.guiFile = guiFile;
+        }
+
+        return guiFile;
     }
 }

@@ -139,6 +139,8 @@ public class Edit{
 
             for(GuiControler controler : guiFile.guiControlers){
                 controler.editPane = editPane;
+                controler.optionsPane = optionsPane;
+                controler.controlersPane = objectsPane;
                 controler.enable();
             }
 
