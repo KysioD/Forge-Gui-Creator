@@ -66,7 +66,7 @@ public class GuiRect extends GuiControler {
     @Override
     public ArrayList<GuiOption> guiOptions() {
         ArrayList<GuiOption> guiOptions = new ArrayList<>();
-        guiOptions.add(new GuiPositionOption(10, 25, this));
+        guiOptions.add(new GuiPositionOption(10, 35, this));
         return guiOptions;
     }
 }
