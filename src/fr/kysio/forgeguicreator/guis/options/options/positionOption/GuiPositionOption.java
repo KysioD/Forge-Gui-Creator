@@ -12,13 +12,21 @@ public class GuiPositionOption extends GuiOption {
 
     @Override
     public void enable() {
+        System.out.println("enabling gui position option");
         Label labelX = new Label("Pos X:");
         Label labelY = new Label("Pos Y:");
 
         labelX.setLayoutX(x);
         labelX.setLayoutY(y);
         labelX.setVisible(true);
+        labelX.setStyle("-fx-text-fill: white");
+        labelY.setLayoutX(x);
+        labelY.setLayoutY(y+15);
+        labelY.setVisible(true);
+        labelY.setStyle("-fx-text-fill: white");
         controler.optionsPane.getChildren().add(labelX);
+        controler.optionsPane.getChildren().add(labelY);
+        controler.optionsPane.setVisible(true);
 
         super.enable();
     }

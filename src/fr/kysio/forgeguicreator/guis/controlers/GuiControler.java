@@ -3,12 +3,9 @@ package fr.kysio.forgeguicreator.guis.controlers;
 
 import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.options.GuiOption;
-import fr.kysio.forgeguicreator.guis.options.GuiOptions;
 import javafx.event.EventHandler;
-import javafx.scene.control.Control;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -52,7 +49,8 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
-        System.out.println("C CLIKE");
+        System.out.println("CLICK ON CONTROLER");
+        System.out.println("Controller gui options : "+guiOptions());
 
         for(GuiControler guiControler : guiFile.guiControlers){
             for(GuiOption guiOption : guiControler.guiOptions()){

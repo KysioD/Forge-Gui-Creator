@@ -5,7 +5,6 @@ import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControlers;
 import fr.kysio.forgeguicreator.guis.options.GuiOption;
-import fr.kysio.forgeguicreator.guis.options.GuiOptions;
 import fr.kysio.forgeguicreator.guis.options.options.positionOption.GuiPositionOption;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -47,9 +46,6 @@ public class GuiRect extends GuiControler {
 
         pane.setStyle("-fx-background-color: "+hex+";");
 
-        System.out.println("Background color hex : "+hex);
-        System.out.println("Background color : "+backgroundColor);
-
         editPane.getChildren().add(pane);
         pane.setOnMouseClicked(this);
     }
@@ -70,7 +66,7 @@ public class GuiRect extends GuiControler {
     @Override
     public ArrayList<GuiOption> guiOptions() {
         ArrayList<GuiOption> guiOptions = new ArrayList<>();
-        guiOptions.add(new GuiPositionOption(5, 5, this));
+        guiOptions.add(new GuiPositionOption(10, 25, this));
         return guiOptions;
     }
 }
