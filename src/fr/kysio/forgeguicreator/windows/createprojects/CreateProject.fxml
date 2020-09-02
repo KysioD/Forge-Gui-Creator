@@ -6,7 +6,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.kysio.forgeguicreator.windows.createprojects.CreateProject">
    <top>
-      <Label text="Vous n'avez aucun projet ! Créez en un !" textFill="WHITE" BorderPane.alignment="CENTER">
+      <Label text="Vous n'avez aucun projet, créez en un !" textFill="WHITE" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="20.0" />
          </BorderPane.margin>
@@ -37,6 +37,7 @@
                     <items>
                       <MenuItem mnemonicParsing="false" text="1.12.2" />
                       <MenuItem mnemonicParsing="false" text="1.14.4" />
+                      <MenuItem mnemonicParsing="false" text="1.15.2" />
                     </items>
                   </MenuButton>
                </bottom>

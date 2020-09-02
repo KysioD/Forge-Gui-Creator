@@ -34,8 +34,10 @@ public class GuiRect extends GuiControler {
         pane = new AnchorPane();
         pane.setLayoutX(x);
         pane.setLayoutY(y);
-        pane.setPrefWidth(width);
-        pane.setPrefHeight(height);
+        pane.setMaxWidth(width);
+        pane.setMaxHeight(height);
+        pane.setMinHeight(height);
+        pane.setMinWidth(width);
         pane.setVisible(true);
 
         String hex = String.format( "#%02X%02X%02X",

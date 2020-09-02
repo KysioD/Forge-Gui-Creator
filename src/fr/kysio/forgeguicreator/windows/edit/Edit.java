@@ -23,6 +23,7 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Objects;
+import java.util.Observable;
 
 public class Edit{
 
@@ -118,8 +119,18 @@ public class Edit{
         FilesManager.updateFile(editedFile, textEdit.getText());
     }
 
+    public void clearGraphicDraw(){
+        if(editPane != null){
+            for(int i = 0; editPane.getChildren().size() > i; i++){
+                editPane.getChildren().remove(i);
+            }
+        }
+    }
+
     public void vueGraphic(){
         try {
+            clearGraphicDraw();
+
             emptyPane.setVisible(false);
             editPane.setVisible(true);
             vueChange.setVisible(true);
@@ -134,7 +145,7 @@ public class Edit{
                     .setPrettyPrinting()
                     .serializeNulls()
                     .disableHtmlEscaping()
-                    .create();;
+                    .create();
             GuiFile guiFile = gson.fromJson(txt, GuiFile.class);
 
             for(GuiControler controler : guiFile.guiControlers){
@@ -154,6 +165,7 @@ public class Edit{
 
     public void vueJson(){
         try {
+            clearGraphicDraw();
             emptyPane.setVisible(false);
             editPane.setVisible(false);
             vueChange.setVisible(true);
@@ -177,6 +189,8 @@ public class Edit{
 
     public void update(){
         if(editedFile == null) return;
+
+        clearGraphicDraw();
 
         generateTree();
 
