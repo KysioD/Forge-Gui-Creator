@@ -2,6 +2,7 @@ package fr.kysio.forgeguicreator.guis.options.options.positionOption;
 
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.guis.options.GuiOption;
+import fr.kysio.forgeguicreator.windows.edit.Edit;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -43,13 +44,17 @@ public class GuiPositionOption extends GuiOption {
                 try {
                     if(!textFieldX.getText().isEmpty()) {
                         controler.x = Integer.parseInt(textFieldX.getText());
+                        System.out.println("edit controler x to : "+controler.x);
                     }
                     if(!textFieldY.getText().isEmpty()){
                         controler.y = Integer.parseInt(textFieldY.getText());
+                        System.out.println("edit controler y to : "+controler.y);
                     }
 
                     textFieldX.setText(controler.x+"");
                     textFieldY.setText(controler.y+"");
+
+                    controler.updateController();
                 }catch (Exception e){
                     e.printStackTrace();
                 }

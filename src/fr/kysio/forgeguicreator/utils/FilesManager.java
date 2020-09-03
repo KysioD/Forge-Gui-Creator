@@ -47,8 +47,8 @@ public class FilesManager {
 
             ArrayList<GuiControler> guiControlers = new ArrayList<>();
 
-            guiControlers.add(new GuiRect(null, 0, 0, 100, 20, Color.RED, null, null, null));
-            guiControlers.add(new GuiRect(null, 10, 10, 50 ,50, Color.WHITE, null, null, null));
+            guiControlers.add(new GuiRect(null, 0, 0, 100, 20, Color.RED, null, null, null, null));
+            guiControlers.add(new GuiRect(null, 10, 10, 50 ,50, Color.WHITE, null, null, null, null));
 
             GuiFile guiFile = new GuiFile(name, guiControlers);
 
@@ -107,6 +107,8 @@ public class FilesManager {
 
             DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
             dos.writeUTF(content);
+
+            System.out.println("file edited");
 
             dos.close();
         } catch (Exception e) {

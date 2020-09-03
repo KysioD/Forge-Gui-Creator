@@ -1,12 +1,18 @@
 package fr.kysio.forgeguicreator.guis.controlers;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import fr.kysio.forgeguicreator.guis.GuiFile;
+import fr.kysio.forgeguicreator.guis.GuiFileTypeAdapter;
 import fr.kysio.forgeguicreator.guis.options.GuiOption;
+import fr.kysio.forgeguicreator.utils.FilesManager;
+import fr.kysio.forgeguicreator.windows.projects.Projects;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class GuiControler extends Pane implements EventHandler<MouseEvent> {
@@ -20,8 +26,9 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
     public Pane editPane;
     public Pane controlersPane;
     public Pane optionsPane;
+    public Pane objectsPane;
 
-    public GuiControler(GuiFile guiFile, GuiControlers type, int x, int y, Pane editPane, Pane controlersPane, Pane optionsPane){
+    public GuiControler(GuiFile guiFile, GuiControlers type, int x, int y, Pane editPane, Pane controlersPane, Pane optionsPane, Pane objectPane){
         this.guiFile = guiFile;
         this.type = type;
         this.x = x;
@@ -29,6 +36,7 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
         this.editPane = editPane;
         this.controlersPane = controlersPane;
         this.optionsPane = optionsPane;
+        this.objectsPane = objectPane;
     }
 
     public void draw() {
@@ -45,6 +53,38 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
 
     public ArrayList<GuiOption> guiOptions(){
         return new ArrayList<>();
+    }
+
+    public void updateController(){
+        File editedFile = new File(System.getProperty("user.home") + "/gui-creator/projects/" + Projects.project.getName()+"/project.json");
+
+        if(editedFile == null || !editedFile.exists() || guiFile == null || editPane == null) return;
+
+        Gson gson = guiFile.createGsonInstance();
+        String json = gson.toJson(guiFile);
+        System.out.println("JSON GUIFILE : "+json);
+
+        FilesManager.updateFile(editedFile, json);
+
+        gson = new GsonBuilder()
+                .registerTypeAdapter(GuiFile.class, new GuiFileTypeAdapter())
+                .setPrettyPrinting()
+                .serializeNulls()
+                .disableHtmlEscaping()
+                .create();
+        GuiFile guiFile = gson.fromJson(json, GuiFile.class);
+
+        for(int i = 0; editPane.getChildren().size() > i; i++){
+            editPane.getChildren().remove(i);
+        }
+
+        for(GuiControler controler : guiFile.guiControlers){
+            controler.editPane = editPane;
+            controler.optionsPane = optionsPane;
+            controler.controlersPane = objectsPane;
+            controler.enable();
+        }
+
     }
 
     @Override

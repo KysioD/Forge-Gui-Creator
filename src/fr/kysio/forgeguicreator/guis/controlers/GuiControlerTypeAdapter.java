@@ -9,6 +9,8 @@ import java.io.IOException;
 public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
     @Override
     public void write(JsonWriter writer, GuiControler guiControler) throws IOException {
+        System.out.println("WRITE CONTROLLER X : " +guiControler.x);
+        System.out.println("WRITE CONTROLLER Y: "+guiControler.y);
         writer.name("x").value(guiControler.x);
         writer.name("y").value(guiControler.y);
         //writer.name("type").value(guiControler.type.name());
@@ -54,6 +56,6 @@ public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
         //}
         //reader.endObject();
 
-        return new GuiControler(null, type, x, y, null, null, null);
+        return new GuiControler(null, type, x, y, null, null, null, null);
     }
 }

@@ -21,8 +21,8 @@ public class GuiRect extends GuiControler {
 
     public AnchorPane pane;
 
-    public GuiRect(GuiFile guiFile, int x, int y, int width, int height, Color backgoundColor, @Nullable Pane editPane, @Nullable Pane controlerPane, @Nullable Pane optionsPane) {
-        super(guiFile, GuiControlers.GUI_RECT, x, y, editPane, controlerPane, optionsPane);
+    public GuiRect(GuiFile guiFile, int x, int y, int width, int height, Color backgoundColor, @Nullable Pane editPane, @Nullable Pane controlerPane, @Nullable Pane optionsPane, @Nullable Pane objectPane) {
+        super(guiFile, GuiControlers.GUI_RECT, x, y, editPane, controlerPane, optionsPane, objectPane);
         this.backgroundColor = backgoundColor;
         this.width = width;
         this.height = height;
