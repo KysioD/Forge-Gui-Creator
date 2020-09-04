@@ -81,14 +81,6 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
 
         FilesManager.updateFile(editedFile, json);
 
-        gson = new GsonBuilder()
-                .registerTypeAdapter(GuiFile.class, new GuiFileTypeAdapter())
-                .setPrettyPrinting()
-                .serializeNulls()
-                .disableHtmlEscaping()
-                .create();
-        //guiFile = gson.fromJson(json, GuiFile.class);
-
         resetGraphic();
     }
 
