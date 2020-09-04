@@ -5,7 +5,8 @@ import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControlers;
 import fr.kysio.forgeguicreator.guis.options.GuiOption;
-import fr.kysio.forgeguicreator.guis.options.options.positionOption.GuiPositionOption;
+import fr.kysio.forgeguicreator.guis.options.options.GuiPositionOption;
+import fr.kysio.forgeguicreator.guis.options.options.GuiScaleOption;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -53,6 +54,7 @@ public class GuiRect extends GuiControler {
     @Override
     public void enable() {
         draw();
+        super.enable();
     }
 
     @Override
@@ -67,6 +69,7 @@ public class GuiRect extends GuiControler {
     public ArrayList<GuiOption> guiOptions() {
         ArrayList<GuiOption> guiOptions = new ArrayList<>();
         guiOptions.add(new GuiPositionOption(10, 35, this));
+        guiOptions.add(new GuiScaleOption(10, 100, this));
         return guiOptions;
     }
 }
