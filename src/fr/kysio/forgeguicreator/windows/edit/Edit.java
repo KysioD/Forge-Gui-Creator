@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -116,6 +117,7 @@ public class Edit{
     }
 
     public void fileEditorUpdated(){
+        System.out.println("update");
         FilesManager.updateFile(editedFile, textEdit.getText());
     }
 
@@ -139,6 +141,7 @@ public class Edit{
             DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
 
             String txt = dis.readUTF();
+            dis.close();
 
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(GuiFile.class, new GuiFileTypeAdapter())
@@ -175,6 +178,10 @@ public class Edit{
 
             String txt = dis.readUTF();
 
+            dis.close();
+
+            System.out.println("txt json : "+txt);
+
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonParser jp = new JsonParser();
             JsonElement je = jp.parse(txt);
@@ -206,6 +213,8 @@ public class Edit{
                 DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
 
                 String txt = dis.readUTF();
+
+                dis.close();
 
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 JsonParser jp = new JsonParser();

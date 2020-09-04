@@ -108,9 +108,20 @@ public class FilesManager {
             DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
             dos.writeUTF(content);
 
+            dos.close();
+
+            System.out.println("file content : "+content);
+
             System.out.println("file edited");
 
-            dos.close();
+
+            DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
+
+            String txt = dis.readUTF();
+
+            dis.close();
+
+            System.out.println("new file content "+txt);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,6 +193,7 @@ public class FilesManager {
 
             String txt = dis.readUTF();
             System.out.println(txt);
+            dis.close();
 
             Project project = gson.fromJson(txt, Project.class);
 

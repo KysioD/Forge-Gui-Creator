@@ -65,6 +65,7 @@ public class Projects {
     public void startProject(){
         try {
             Main.changeWindow(FXMLLoader.load(getClass().getResource("../edit/edit.fxml")));
+            Main.changeWindow(FXMLLoader.load(getClass().getResource("../edit/edit.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }

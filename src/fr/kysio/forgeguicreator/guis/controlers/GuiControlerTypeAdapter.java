@@ -34,9 +34,11 @@ public class GuiControlerTypeAdapter extends TypeAdapter<GuiControler> {
             switch (reader.nextName()){
                 case "x":
                     x = reader.nextInt();
+                    System.out.println("READ CONTROLLER X : " +x);
                     break;
                 case "y":
                     y = reader.nextInt();
+                    System.out.println("READ CONTROLLER Y : "+y);
                     break;
                 default:
                     reader.skipValue();
