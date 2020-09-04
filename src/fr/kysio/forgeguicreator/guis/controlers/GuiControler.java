@@ -55,14 +55,25 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
         return new ArrayList<>();
     }
 
+    public void resetGraphic(){
+        for(int i = 0; editPane.getChildren().size() > i; i++){
+            editPane.getChildren().remove(i);
+        }
+
+        for(GuiControler controler : guiFile.guiControlers){
+            controler.editPane = editPane;
+            controler.optionsPane = optionsPane;
+            controler.controlersPane = objectsPane;
+            controler.enable();
+        }
+    }
+
     public void updateController(){
         File editedFile = new File(System.getProperty("user.home") + "/gui-creator/projects/" + Projects.project.getName()+"/"+guiFile.name+".gui");
 
         if(editedFile == null || !editedFile.exists() || guiFile == null || editPane == null) return;
 
-        for(int i = 0; editPane.getChildren().size() > i; i++){
-            editPane.getChildren().remove(i);
-        }
+        resetGraphic();
 
         Gson gson = guiFile.createGsonInstance();
         String json = gson.toJson(guiFile);
@@ -76,15 +87,9 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
                 .serializeNulls()
                 .disableHtmlEscaping()
                 .create();
-        GuiFile guiFile = gson.fromJson(json, GuiFile.class);
+        //guiFile = gson.fromJson(json, GuiFile.class);
 
-        for(GuiControler controler : guiFile.guiControlers){
-            controler.editPane = editPane;
-            controler.optionsPane = optionsPane;
-            controler.controlersPane = objectsPane;
-            controler.enable();
-        }
-
+        resetGraphic();
     }
 
     @Override
