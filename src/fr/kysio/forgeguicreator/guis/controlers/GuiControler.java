@@ -16,6 +16,8 @@ import javafx.scene.layout.Pane;
 import java.io.File;
 import java.util.ArrayList;
 
+import static fr.kysio.forgeguicreator.guis.controlers.ControlerGizmo2D.currentGizmo;
+
 public class GuiControler extends Pane implements EventHandler<MouseEvent> {
 
     public GuiFile guiFile;
@@ -95,6 +97,8 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
         System.out.println("CLICK ON CONTROLER");
         System.out.println("Controller gui options : "+guiOptions());
 
+        if(currentGizmo != null) currentGizmo.remove();
+
         for(GuiControler guiControler : guiFile.guiControlers){
             for(GuiOption guiOption : guiControler.guiOptions()){
                 guiOption.disable();
@@ -104,5 +108,10 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
         for(GuiOption guiOption : guiOptions()){
             guiOption.enable();
         }
+
+        ControlerGizmo2D gizmo2D = new ControlerGizmo2D(this);
+        gizmo2D.render();
+
+        currentGizmo = gizmo2D;
     }
 }

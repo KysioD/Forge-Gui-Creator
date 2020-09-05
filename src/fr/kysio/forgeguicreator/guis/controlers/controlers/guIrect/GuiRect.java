@@ -17,7 +17,7 @@ public class GuiRect extends GuiControler {
 
     public Color backgroundColor;
 
-    public AnchorPane pane;
+    public Pane pane;
 
     public GuiRect(GuiFile guiFile, int x, int y, int width, int height, Color backgoundColor, @Nullable Pane editPane, @Nullable Pane controlerPane, @Nullable Pane optionsPane, @Nullable Pane objectPane) {
         super(guiFile, GuiControlers.GUI_RECT, x, y, width, height, editPane, controlerPane, optionsPane, objectPane);
@@ -27,7 +27,7 @@ public class GuiRect extends GuiControler {
     @Override
     public void draw() {
         System.out.println("draw guirect");
-        pane = new AnchorPane();
+        pane = this;
         pane.setLayoutX(x);
         pane.setLayoutY(y);
         pane.setMaxWidth(width);
@@ -46,7 +46,11 @@ public class GuiRect extends GuiControler {
 
         pane.setStyle("-fx-background-color: "+hex+";");
 
-        editPane.getChildren().add(pane);
+        try {
+            editPane.getChildren().add(pane);
+        }catch (Exception e){
+            ;
+        }
         pane.setOnMouseClicked(this);
     }
 

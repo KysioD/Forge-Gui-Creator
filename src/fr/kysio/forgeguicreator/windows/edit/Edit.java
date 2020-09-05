@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.GuiFileTypeAdapter;
+import fr.kysio.forgeguicreator.guis.controlers.ControlerGizmo2D;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
