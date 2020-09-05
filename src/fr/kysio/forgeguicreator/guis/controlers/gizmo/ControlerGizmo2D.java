@@ -48,6 +48,7 @@ public class ControlerGizmo2D {
         posYPane.setOnMouseReleased(event -> {
             currentGizmo = new ControlerGizmo2D(guiControler);
             guiControler.editPane.setOnMouseDragged(event1 -> {});
+            verifPos();
             remove();
         });
 
@@ -63,6 +64,7 @@ public class ControlerGizmo2D {
         posXPane.setOnMouseReleased(event -> {
             currentGizmo = new ControlerGizmo2D(guiControler);
             guiControler.editPane.setOnMouseDragged(event1 -> {});
+            verifPos();
             remove();
         });
 
@@ -97,6 +99,7 @@ public class ControlerGizmo2D {
                     guiControler.y = (int) ((guiControler.height / 2 - 40) + event.getY());
 
                     guiControler.updateController();
+                    verifPos();
                 });
                 break;
             case SCALE:
@@ -104,8 +107,42 @@ public class ControlerGizmo2D {
                     guiControler.height = (int) ((guiControler.height / 2 - 40) + event.getY());
 
                     guiControler.updateController();
+                    verifPos();
                 });
                 break;
+        }
+    }
+
+    private void verifPos(){
+        if(guiControler.x+guiControler.width > 700){
+
+            guiControler.x = 700-guiControler.width;
+
+            guiControler.updateController();
+        }
+        if(guiControler.y+guiControler.height > 500){
+            guiControler.y = 500-guiControler.height;
+            guiControler.updateController();
+        }
+        if(guiControler.x < 0){
+
+            guiControler.x = 0;
+
+            guiControler.updateController();
+        }
+        if(guiControler.y < 0){
+
+            guiControler.y = 0;
+
+            guiControler.updateController();
+        }
+        if(guiControler.width > 700){
+            guiControler.width = 700;
+            guiControler.updateController();
+        }
+        if(guiControler.height > 500){
+            guiControler.height = 500;
+            guiControler.updateController();
         }
     }
 
@@ -119,6 +156,7 @@ public class ControlerGizmo2D {
                     guiControler.x = (int) ((guiControler.width / 2) + event.getX()) - (guiControler.width + 40);
 
                     guiControler.updateController();
+                    verifPos();
                 });
                 break;
             case SCALE:
@@ -127,6 +165,7 @@ public class ControlerGizmo2D {
                     guiControler.width = (int) ((guiControler.width / 2) + event.getX()) - (guiControler.width + 40);
 
                     guiControler.updateController();
+                    verifPos();
                 });
                 break;
         }
