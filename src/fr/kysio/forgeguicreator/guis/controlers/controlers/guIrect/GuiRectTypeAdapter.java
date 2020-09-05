@@ -21,8 +21,8 @@ public class GuiRectTypeAdapter extends TypeAdapter<GuiControler> {
             writer.name("backgroundColor_r").value(rect.backgroundColor.getRed());
             writer.name("backgroundColor_g").value(rect.backgroundColor.getGreen());
             writer.name("backgroundColor_b").value(rect.backgroundColor.getBlue());
-            writer.name("width").value(rect.width);
-            writer.name("height").value(rect.height);
+            //writer.name("width").value(rect.width);
+            //writer.name("height").value(rect.height);
             //writer.endObject();
     }
 
@@ -39,8 +39,6 @@ public class GuiRectTypeAdapter extends TypeAdapter<GuiControler> {
         double backgroundColorR = 0;
         double backgroundColorG = 0 ;
         double backgroundColorB = 0;
-        int width = 0;
-        int height = 0;
         GuiControler controler = new GuiControlerTypeAdapter().customRread(reader, guiControlers);
 
         while (reader.hasNext()){
@@ -59,12 +57,12 @@ public class GuiRectTypeAdapter extends TypeAdapter<GuiControler> {
                     backgroundColorB = reader.nextDouble();
                     System.out.println("READ BACKGROUND COLOR B ");
                     break;
-                case "width":
+                /*case "width":
                     width = reader.nextInt();
                     break;
                 case "height":
                     height = reader.nextInt();
-                    break;
+                    break;*/
                 default:
                     reader.skipValue();
                     break;
@@ -73,8 +71,7 @@ public class GuiRectTypeAdapter extends TypeAdapter<GuiControler> {
         //reader.endObject();
 
         System.out.println("READED COLOR : "+backgroundColorR+" "+backgroundColorG+" "+backgroundColorB);
-        System.out.println(width);
 
-        return new GuiRect(null, controler.x, controler.y, width, height, new Color(backgroundColorR, backgroundColorG, backgroundColorB, 1), null, null, null, null);
+        return new GuiRect(null, controler.x, controler.y, controler.width, controler.height, new Color(backgroundColorR, backgroundColorG, backgroundColorB, 1), null, null, null, null);
     }
 }

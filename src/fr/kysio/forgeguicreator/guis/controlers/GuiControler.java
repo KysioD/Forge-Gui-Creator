@@ -22,6 +22,8 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
 
     public int x;
     public int y;
+    public int width;
+    public int height;
     public GuiControlers type;
 
     public Pane editPane;
@@ -29,11 +31,13 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
     public Pane optionsPane;
     public Pane objectsPane;
 
-    public GuiControler(GuiFile guiFile, GuiControlers type, int x, int y, Pane editPane, Pane controlersPane, Pane optionsPane, Pane objectPane){
+    public GuiControler(GuiFile guiFile, GuiControlers type, int x, int y, int width, int height, Pane editPane, Pane controlersPane, Pane optionsPane, Pane objectPane){
         this.guiFile = guiFile;
         this.type = type;
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
         this.editPane = editPane;
         this.controlersPane = controlersPane;
         this.optionsPane = optionsPane;
@@ -46,6 +50,7 @@ public class GuiControler extends Pane implements EventHandler<MouseEvent> {
 
     public void enable(){
         this.setOnMouseClicked(this);
+        draw();
     }
 
     public void disable(){

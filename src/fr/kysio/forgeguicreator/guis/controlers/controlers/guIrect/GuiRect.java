@@ -17,20 +17,16 @@ public class GuiRect extends GuiControler {
 
     public Color backgroundColor;
 
-    public int width;
-    public int height;
-
     public AnchorPane pane;
 
     public GuiRect(GuiFile guiFile, int x, int y, int width, int height, Color backgoundColor, @Nullable Pane editPane, @Nullable Pane controlerPane, @Nullable Pane optionsPane, @Nullable Pane objectPane) {
-        super(guiFile, GuiControlers.GUI_RECT, x, y, editPane, controlerPane, optionsPane, objectPane);
+        super(guiFile, GuiControlers.GUI_RECT, x, y, width, height, editPane, controlerPane, optionsPane, objectPane);
         this.backgroundColor = backgoundColor;
-        this.width = width;
-        this.height = height;
     }
 
     @Override
     public void draw() {
+        System.out.println("draw guirect");
         pane = new AnchorPane();
         pane.setLayoutX(x);
         pane.setLayoutY(y);
@@ -39,6 +35,9 @@ public class GuiRect extends GuiControler {
         pane.setMinHeight(height);
         pane.setMinWidth(width);
         pane.setVisible(true);
+
+        System.out.println("width : "+width);
+        System.out.println("height : "+height);
 
         String hex = String.format( "#%02X%02X%02X",
                 (int)( backgroundColor.getRed() * 255 ),
@@ -49,12 +48,6 @@ public class GuiRect extends GuiControler {
 
         editPane.getChildren().add(pane);
         pane.setOnMouseClicked(this);
-    }
-
-    @Override
-    public void enable() {
-        draw();
-        super.enable();
     }
 
     @Override

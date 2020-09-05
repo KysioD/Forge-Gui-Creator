@@ -151,15 +151,15 @@ public class Edit{
                     .create();
             GuiFile guiFile = gson.fromJson(txt, GuiFile.class);
 
+            System.out.println("loading controllers : "+guiFile.guiControlers);
+
             for(GuiControler controler : guiFile.guiControlers){
+                System.out.println("controler loaded : "+controler.x+" "+controler.y+" "+controler.width+" "+controler.height);
                 controler.editPane = editPane;
                 controler.optionsPane = optionsPane;
                 controler.controlersPane = objectsPane;
                 controler.enable();
             }
-
-            System.out.println(guiFile);
-            System.out.println(guiFile.guiControlers);
 
         }catch (Exception e){
             e.printStackTrace();
