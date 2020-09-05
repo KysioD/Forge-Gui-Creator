@@ -1,15 +1,14 @@
-package fr.kysio.forgeguicreator.guis.controlers;
+package fr.kysio.forgeguicreator.guis.controlers.gizmo;
 
-import fr.kysio.forgeguicreator.guis.options.GuiOption;
+import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
 import javafx.scene.layout.AnchorPane;
-
-import java.awt.*;
 
 public class ControlerGizmo2D {
 
     public GuiControler guiControler;
 
     public static ControlerGizmo2D currentGizmo;
+    public static GizmoMods gizmoMod;
 
     public ControlerGizmo2D(GuiControler guiControler) {
         this.guiControler = guiControler;
@@ -23,6 +22,8 @@ public class ControlerGizmo2D {
     public void render() {
         System.out.println("rendering gizmo");
 
+        System.out.println("RENDER GIZMO WITH MOD : "+gizmoMod);
+
         paneY = new AnchorPane();
         paneY.setLayoutX(guiControler.width / 2 - 2);
         paneY.setLayoutY(guiControler.height / 2 - 40);
@@ -30,6 +31,11 @@ public class ControlerGizmo2D {
         paneY.setStyle("-fx-background-color: white; -fx-border-color: black");
         paneY.setVisible(true);
 
+        paneX = new AnchorPane();
+        paneX.setLayoutX(guiControler.width / 2);
+        paneX.setLayoutY(guiControler.height / 2 - 2);
+        paneX.setPrefSize(40, 2);
+        paneX.setStyle("-fx-background-color: white; -fx-border-color: black");
         posYPane = new AnchorPane();
         posYPane.setLayoutX(guiControler.width / 2 - 7);
         posYPane.setLayoutY(guiControler.height / 2 - 40);
@@ -39,12 +45,11 @@ public class ControlerGizmo2D {
             System.out.println("PRESS POS Y GIZMO");
             changePosY();
         });
-
-        paneX = new AnchorPane();
-        paneX.setLayoutX(guiControler.width / 2);
-        paneX.setLayoutY(guiControler.height / 2 - 2);
-        paneX.setPrefSize(40, 2);
-        paneX.setStyle("-fx-background-color: white; -fx-border-color: black");
+        posYPane.setOnMouseReleased(event -> {
+            currentGizmo = new ControlerGizmo2D(guiControler);
+            guiControler.editPane.setOnMouseDragged(event1 -> {});
+            remove();
+        });
 
         posXPane = new AnchorPane();
         posXPane.setLayoutX(guiControler.width / 2 + 40);
@@ -55,6 +60,17 @@ public class ControlerGizmo2D {
             System.out.println("PRESS POS X GIZMO");
             changePosX();
         });
+        posXPane.setOnMouseReleased(event -> {
+            currentGizmo = new ControlerGizmo2D(guiControler);
+            guiControler.editPane.setOnMouseDragged(event1 -> {});
+            remove();
+        });
+
+
+        if(gizmoMod == GizmoMods.TRANSLATE){
+            posYPane.setRotate(45);
+            posXPane.setRotate(45);
+        }
 
         guiControler.getChildren().addAll(paneY, posYPane, paneX, posXPane);
     }
@@ -73,20 +89,47 @@ public class ControlerGizmo2D {
     }
 
     private void changePosY() {
-            guiControler.editPane.setOnMouseDragged(event -> {
+        switch (gizmoMod) {
+            default:
+                break;
+            case TRANSLATE:
+                guiControler.editPane.setOnMouseDragged(event -> {
                     guiControler.y = (int) ((guiControler.height / 2 - 40) + event.getY());
 
                     guiControler.updateController();
-            });
+                });
+                break;
+            case SCALE:
+                guiControler.editPane.setOnMouseDragged(event -> {
+                    guiControler.height = (int) ((guiControler.height / 2 - 40) + event.getY());
+
+                    guiControler.updateController();
+                });
+                break;
+        }
     }
 
     private void changePosX() {
-        System.out.println("CHANGE POS X");
-        guiControler.editPane.setOnMouseDragged(event -> {
-            guiControler.x = (int) ((guiControler.width / 2) + event.getX()) -(guiControler.width+40);
+        switch (gizmoMod) {
+            default:
+                break;
+            case TRANSLATE:
+                System.out.println("MOD TRANSLATE");
+                guiControler.editPane.setOnMouseDragged(event -> {
+                    guiControler.x = (int) ((guiControler.width / 2) + event.getX()) - (guiControler.width + 40);
 
-            guiControler.updateController();
-        });
+                    guiControler.updateController();
+                });
+                break;
+            case SCALE:
+                System.out.println("MOD SCALE");
+                guiControler.editPane.setOnMouseDragged(event -> {
+                    guiControler.width = (int) ((guiControler.width / 2) + event.getX()) - (guiControler.width + 40);
+
+                    guiControler.updateController();
+                });
+                break;
+        }
     }
 
     private void changeSizeX() {

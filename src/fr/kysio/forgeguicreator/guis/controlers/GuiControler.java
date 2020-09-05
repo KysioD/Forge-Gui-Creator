@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.GuiFileTypeAdapter;
+import fr.kysio.forgeguicreator.guis.controlers.gizmo.ControlerGizmo2D;
 import fr.kysio.forgeguicreator.guis.options.GuiOption;
 import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
@@ -16,7 +17,7 @@ import javafx.scene.layout.Pane;
 import java.io.File;
 import java.util.ArrayList;
 
-import static fr.kysio.forgeguicreator.guis.controlers.ControlerGizmo2D.currentGizmo;
+import static fr.kysio.forgeguicreator.guis.controlers.gizmo.ControlerGizmo2D.currentGizmo;
 
 public class GuiControler extends Pane implements EventHandler<MouseEvent> {
 

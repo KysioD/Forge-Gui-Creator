@@ -6,8 +6,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import fr.kysio.forgeguicreator.guis.GuiFile;
 import fr.kysio.forgeguicreator.guis.GuiFileTypeAdapter;
-import fr.kysio.forgeguicreator.guis.controlers.ControlerGizmo2D;
 import fr.kysio.forgeguicreator.guis.controlers.GuiControler;
+import fr.kysio.forgeguicreator.guis.controlers.gizmo.ControlerGizmo2D;
+import fr.kysio.forgeguicreator.guis.controlers.gizmo.GizmoMods;
 import fr.kysio.forgeguicreator.utils.FilesManager;
 import fr.kysio.forgeguicreator.windows.projects.Projects;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -25,7 +25,6 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Objects;
-import java.util.Observable;
 
 public class Edit{
 
@@ -58,6 +57,15 @@ public class Edit{
     @FXML
     public HBox vueChange;
 
+    @FXML
+    public HBox gizmoMod;
+
+    @FXML
+    public Button gizmoTranslateMod;
+
+    @FXML
+    public Button gizmoScaleMod;
+
     public File editedFile = null;
     public static File selectedFolder = null;
 
@@ -66,6 +74,37 @@ public class Edit{
         Edit.files = treeView;
 
         generateTree();
+        gizmoMod.setVisible(false);
+        ControlerGizmo2D.gizmoMod = GizmoMods.TRANSLATE;
+        gizmoTranslateMod.setStyle("-fx-background-color: black");
+        gizmoTranslateMod.setOnMouseClicked(event -> {
+            gizmoTranslateMod.setStyle("-fx-background-color: black");
+            gizmoScaleMod.setStyle("-fx-background-color: white");
+            ControlerGizmo2D.gizmoMod = GizmoMods.TRANSLATE;
+
+            if(ControlerGizmo2D.currentGizmo != null) {
+
+                GuiControler gizmoControler = ControlerGizmo2D.currentGizmo.guiControler;
+
+                ControlerGizmo2D.currentGizmo.remove();
+                ControlerGizmo2D.currentGizmo = new ControlerGizmo2D(gizmoControler);
+                ControlerGizmo2D.currentGizmo.render();
+            }
+
+        });
+
+        gizmoScaleMod.setOnMouseClicked(event -> {
+            gizmoTranslateMod.setStyle("-fx-background-color: white");
+            gizmoScaleMod.setStyle("-fx-background-color: black");
+            ControlerGizmo2D.gizmoMod = GizmoMods.SCALE;
+
+            GuiControler gizmoControler = ControlerGizmo2D.currentGizmo.guiControler;
+
+            if(ControlerGizmo2D.currentGizmo != null) ControlerGizmo2D.currentGizmo.remove();
+            ControlerGizmo2D.currentGizmo = new ControlerGizmo2D(gizmoControler);
+            ControlerGizmo2D.currentGizmo.render();
+
+        });
 
     }
 
@@ -137,6 +176,7 @@ public class Edit{
             emptyPane.setVisible(false);
             editPane.setVisible(true);
             vueChange.setVisible(true);
+            gizmoMod.setVisible(true);
             txtPane.setVisible(false);
 
             DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
@@ -172,6 +212,7 @@ public class Edit{
             clearGraphicDraw();
             emptyPane.setVisible(false);
             editPane.setVisible(false);
+            gizmoMod.setVisible(false);
             vueChange.setVisible(true);
             txtPane.setVisible(true);
 
@@ -210,6 +251,7 @@ public class Edit{
                 editPane.setVisible(false);
                 vueChange.setVisible(false);
                 txtPane.setVisible(true);
+                gizmoMod.setVisible(false);
 
                 DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
 
