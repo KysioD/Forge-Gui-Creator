@@ -37,6 +37,37 @@ public class FilesManager {
         }
     }
 
+    public static void createCommandFile(File directory, String commandName){
+        if(directory.isDirectory()){
+
+            try {
+                File file = new File(directory.getPath()+"/"+commandName+".command");
+                file.createNewFile();
+
+                ArrayList<GuiControler> guiControlers = new ArrayList<>();
+
+                guiControlers.add(new GuiRect(null, 0, 0, 100, 20, Color.RED, null, null, null, null));
+                guiControlers.add(new GuiRect(null, 10, 10, 50 ,50, Color.WHITE, null, null, null, null));
+
+                GuiFile guiFile = new GuiFile(commandName, guiControlers);
+
+                guiControlers.get(0).guiFile = guiFile;
+                guiControlers.get(1).guiFile = guiFile;
+
+                Gson gson = guiFile.createGsonInstance();
+
+                String json = gson.toJson(guiFile);
+
+                DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+                dos.writeUTF(json);
+
+                dos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 
     public static void createGuiFile(File directory, String name){
         if(directory.isDirectory()){

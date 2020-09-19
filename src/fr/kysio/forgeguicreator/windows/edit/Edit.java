@@ -16,6 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -42,6 +45,9 @@ public class Edit{
 
     @FXML
     public Pane txtPane;
+
+    @FXML
+    public Pane commandPane;
 
     @FXML
     public Pane emptyPane;
@@ -148,12 +154,33 @@ public class Edit{
                 update();
             }
         }catch (Exception e) {
+            e.printStackTrace();
         }
         /*if(selectedFolder != null){
             FilesManager.createGuiFile(selectedFolder, "untitled");
         }*/
 
         //generateTree();
+    }
+
+    public void createCommand(){
+        System.out.println("CREATE COMMAND INTO "+selectedFolder);
+        try {
+            if(selectedFolder != null) {
+                popup = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("../createcommands/createcommands.fxml"));
+
+                popup.setTitle("Create command into " + selectedFolder.getName());
+                popup.setScene(new Scene(root));
+                popup.setResizable(false);
+                popup.centerOnScreen();
+                popup.show();
+
+                update();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void fileEditorUpdated(){
@@ -174,6 +201,7 @@ public class Edit{
             clearGraphicDraw();
 
             emptyPane.setVisible(false);
+            commandPane.setVisible(false);
             editPane.setVisible(true);
             vueChange.setVisible(true);
             gizmoMod.setVisible(true);
@@ -207,10 +235,36 @@ public class Edit{
         }
     }
 
+    public void vueCommand(){
+        try{
+            clearGraphicDraw();
+            emptyPane.setVisible(false);
+            commandPane.setVisible(true);
+            editPane.setVisible(false);
+            gizmoMod.setVisible(false);
+            vueChange.setVisible(false);
+            txtPane.setVisible(true);
+
+            DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(editedFile)));
+
+            String txt = dis.readUTF();
+
+            dis.close();
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonParser jp = new JsonParser();
+            JsonElement je = jp.parse(txt);
+            String prettyJsonString = gson.toJson(je);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void vueJson(){
         try {
             clearGraphicDraw();
             emptyPane.setVisible(false);
+            commandPane.setVisible(false);
             editPane.setVisible(false);
             gizmoMod.setVisible(false);
             vueChange.setVisible(true);
@@ -248,6 +302,7 @@ public class Edit{
             try {
                 System.out.println("EDITING .JSON FILE");
                 emptyPane.setVisible(false);
+                commandPane.setVisible(false);
                 editPane.setVisible(false);
                 vueChange.setVisible(false);
                 txtPane.setVisible(true);
@@ -272,6 +327,12 @@ public class Edit{
         }else if(args[args.length-1].equals("gui")){
             try {
                 vueGraphic();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }else if(args[args.length-1].equals("command")){
+            try {
+                vueCommand();
             }catch (Exception e){
                 e.printStackTrace();
             }

@@ -5,9 +5,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.kysio.forgeguicreator.windows.edit.creategui.CreateGui">
    <children>
-      <Label layoutX="228.0" layoutY="14.0" text="Créer un nouveau GUI" textFill="WHITE" />
-      <TextField fx:id="name" layoutX="215.0" layoutY="124.0" promptText="Nom du GUI" />
-      <Label layoutX="215.0" layoutY="101.0" text="Nom du GUI" textFill="WHITE" />
+      <Label layoutX="237.0" layoutY="14.0" text="Créer un nouveau gui" textFill="WHITE" />
+      <TextField fx:id="name" layoutX="215.0" layoutY="124.0" promptText="Nom du gui" />
+      <Label layoutX="215.0" layoutY="101.0" text="Nom du gui" textFill="WHITE" />
       <Button layoutX="181.0" layoutY="306.0" mnemonicParsing="false" onAction="#createGui" prefHeight="26.0" prefWidth="227.0" text="Créer un gui" />
    </children>
 </AnchorPane>

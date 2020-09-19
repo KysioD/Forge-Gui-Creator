@@ -3,27 +3,27 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720"
-            prefWidth="1280" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.kysio.forgeguicreator.windows.edit.Edit">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.kysio.forgeguicreator.windows.edit.Edit">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu fx:id="nameMenu" disable="true" mnemonicParsing="false" style="color: white;" text="Menu name"/>
+                <Menu fx:id="nameMenu" disable="true" mnemonicParsing="false" style="color: white;" text="Menu name" />
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#createGui" text="Create GUI file"/>
+                        <MenuItem mnemonicParsing="false" onAction="#createGui" text="Create GUI file" />
+                  <MenuItem mnemonicParsing="false" onAction="#createCommand" text="Command file" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete"/>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About"/>
+                        <MenuItem mnemonicParsing="false" text="About" />
                     </items>
                 </Menu>
             </menus>
@@ -32,23 +32,16 @@
     <left>
         <BorderPane prefHeight="691.0" prefWidth="249.0" BorderPane.alignment="CENTER">
             <center>
-                <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0"
-                           style="-fx-background-color: #303030; -fx-border-color: white;"
-                           BorderPane.alignment="CENTER">
+                <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #303030; -fx-border-color: white;" BorderPane.alignment="CENTER">
                     <items>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030;">
                             <center>
-                                <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;"
-                                            BorderPane.alignment="CENTER">
+                                <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
                                     <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="711.0" prefWidth="245.0"
-                                                    style="-fx-background-color: #303030;">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="711.0" prefWidth="245.0" style="-fx-background-color: #303030;">
                                             <children>
-                                                <Label layoutX="97.0" layoutY="6.0" text="Fichiers" textFill="WHITE"/>
-                                                <TreeView fx:id="treeView" editable="true" layoutY="22.0"
-                                                          onMouseClicked="#selectFile" prefHeight="300.0"
-                                                          prefWidth="228.0"
-                                                          style="-fx-background-color: #303030; -fx-border-color: #303030;"/>
+                                                <Label layoutX="97.0" layoutY="6.0" text="Fichiers" textFill="WHITE" />
+                                                <TreeView fx:id="treeView" editable="true" layoutY="22.0" onMouseClicked="#selectFile" prefHeight="300.0" prefWidth="228.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -57,14 +50,11 @@
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030;">
                             <center>
-                                <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;"
-                                            BorderPane.alignment="CENTER">
+                                <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
                                     <content>
-                                        <AnchorPane fx:id="objectsPane" minHeight="0.0" minWidth="0.0"
-                                                    prefHeight="814.0" prefWidth="229.0"
-                                                    style="-fx-background-color: #303030;">
+                                        <AnchorPane fx:id="objectsPane" minHeight="0.0" minWidth="0.0" prefHeight="814.0" prefWidth="229.0" style="-fx-background-color: #303030;">
                                             <children>
-                                                <Label layoutX="94.0" layoutY="6.0" text="Objets" textFill="WHITE"/>
+                                                <Label layoutX="94.0" layoutY="6.0" text="Objets" textFill="WHITE" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -77,16 +67,13 @@
         </BorderPane>
     </left>
     <right>
-        <BorderPane prefHeight="691.0" prefWidth="250.0" style="-fx-background-color: #303030; -fx-border-color: white;"
-                    BorderPane.alignment="CENTER">
+        <BorderPane prefHeight="691.0" prefWidth="250.0" style="-fx-background-color: #303030; -fx-border-color: white;" BorderPane.alignment="CENTER">
             <center>
-                <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030;"
-                            BorderPane.alignment="CENTER">
+                <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER">
                     <content>
-                        <AnchorPane fx:id="optionsPane" minHeight="0.0" minWidth="0.0" prefHeight="1049.0"
-                                    prefWidth="248.0" style="-fx-background-color: #303030;">
+                        <AnchorPane fx:id="optionsPane" minHeight="0.0" minWidth="0.0" prefHeight="1049.0" prefWidth="248.0" style="-fx-background-color: #303030;">
                             <children>
-                                <Label layoutX="80.0" layoutY="6.0" text="Configuration" textFill="WHITE"/>
+                                <Label layoutX="80.0" layoutY="6.0" text="Configuration" textFill="WHITE" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -95,44 +82,49 @@
         </BorderPane>
     </right>
     <center>
-        <BorderPane onKeyReleased="#fileEditorUpdated" prefHeight="200.0" prefWidth="200.0"
-                    style="-fx-background-color: #303030; -fx-border-color: white;" BorderPane.alignment="CENTER">
+        <BorderPane onKeyReleased="#fileEditorUpdated" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #303030; -fx-border-color: white;" BorderPane.alignment="CENTER">
             <center>
-                <AnchorPane maxHeight="500.0" maxWidth="700.0" minHeight="500.0" minWidth="700.0" prefHeight="500.0"
-                            prefWidth="700.0" style="-fx-background-color: #303030; -fx-border-color: #303030;"
-                            BorderPane.alignment="CENTER">
+                <AnchorPane maxHeight="500.0" maxWidth="700.0" minHeight="500.0" minWidth="700.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" BorderPane.alignment="CENTER">
                     <children>
                         <AnchorPane fx:id="txtPane" prefHeight="501.0" prefWidth="701.0" visible="false">
                             <children>
-                                <TextArea fx:id="textEdit" onKeyPressed="#fileEditorUpdated" prefHeight="502.0"
-                                          prefWidth="701.0" style="-fx-background-color: gray;"/>
+                                <TextArea fx:id="textEdit" onKeyPressed="#fileEditorUpdated" prefHeight="502.0" prefWidth="701.0" style="-fx-background-color: gray;" />
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="editPane" prefHeight="500.0" prefWidth="700.0"
-                                    style="-fx-background-color: white;" visible="false"/>
-                        <AnchorPane fx:id="emptyPane" prefHeight="501.0" prefWidth="700.0"
-                                    style="-fx-background-color: gray;">
+                        <AnchorPane fx:id="editPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" visible="false" />
+                        <AnchorPane fx:id="emptyPane" prefHeight="501.0" prefWidth="700.0" style="-fx-background-color: gray;">
                             <children>
-                                <Label layoutX="120.0" layoutY="243.0"
-                                       text="Pour commencer à travailler, sélectionnez un fichier dans la hiérarchie"
-                                       textFill="WHITE"/>
+                                <Label layoutX="120.0" layoutY="243.0" text="Pour commencer à travailler, sélectionnez un fichier dans la hiérarchie" textFill="WHITE" />
                             </children>
                         </AnchorPane>
+                  <AnchorPane fx:id="commandPane" prefHeight="501.0" prefWidth="700.0" style="-fx-background-color: gray;" visible="false">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Command" textFill="WHITE">
+                           <font>
+                              <Font name="Consolas Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="83.0" text="Command name : " textFill="WHITE" />
+                        <TextField layoutX="14.0" layoutY="100.0" />
+                        <Label layoutX="14.0" layoutY="139.0" text="Command description : " textFill="WHITE" />
+                        <TextArea layoutX="14.0" layoutY="156.0" prefHeight="48.0" prefWidth="181.0" />
+                        <Label layoutX="14.0" layoutY="218.0" text="Command permission : " textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
                     </children>
                 </AnchorPane>
             </center>
             <bottom>
-                <HBox fx:id="vueChange" prefHeight="26.0" prefWidth="779.0" visible="false"
-                      BorderPane.alignment="CENTER">
+                <HBox fx:id="vueChange" prefHeight="26.0" prefWidth="779.0" visible="false" BorderPane.alignment="CENTER">
                     <children>
                         <Button mnemonicParsing="false" onAction="#vueJson" text="Vue JSON">
                             <HBox.margin>
-                                <Insets left="15.0"/>
+                                <Insets left="15.0" />
                             </HBox.margin>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#vueGraphic" text="Vue graphique">
                             <HBox.margin>
-                                <Insets left="15.0"/>
+                                <Insets left="15.0" />
                             </HBox.margin>
                         </Button>
                     </children>
@@ -143,13 +135,13 @@
                     <children>
                         <Label text="Gizmo : " textAlignment="CENTER" textFill="WHITE">
                             <HBox.margin>
-                                <Insets top="5.0"/>
+                                <Insets top="5.0" />
                             </HBox.margin>
                         </Label>
-                        <Button fx:id="gizmoTranslateMod" mnemonicParsing="false" text="Translate"/>
+                        <Button fx:id="gizmoTranslateMod" mnemonicParsing="false" text="Translate" />
                         <Button fx:id="gizmoScaleMod" mnemonicParsing="false" text="Scale">
                             <HBox.margin>
-                                <Insets left="2.0"/>
+                                <Insets left="2.0" />
                             </HBox.margin>
                         </Button>
                     </children>
